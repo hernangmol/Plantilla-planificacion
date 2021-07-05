@@ -7,7 +7,7 @@ codirector, % Uncomment to add a codirector to the title page
 
 
 % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
-\titulo{Título del proyecto} 
+\titulo{Sistema de Monitoreo de Temperaturas de Bogies - Locomotora CNR - CKD 8} 
 
 % Nombre del posgrado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
 \posgrado{Carrera de Especialización en Sistemas Embebidos} 
@@ -17,18 +17,18 @@ codirector, % Uncomment to add a codirector to the title page
 %\posgrado{Maestría en Internet de las cosas}
 
 % Tu nombre, se puede usar el cualquier lugar del documento con el comando \authorname
-\autor{Nombre del Autor} 
+\autor{Ing. Hernán Gomez Molino} 
 
 % El nombre del director y co-director, se puede usar el cualquier lugar del documento con el comando \supname y \cosupname y \pertesupname y \pertecosupname
-\director{Nombre del Director}
-\pertenenciaDirector{pertenencia} 
+\director{Esp. Ing. Martín Harris}
+\pertenenciaDirector{SOFSE - DNT} 
 % FIXME:NO IMPLEMENTADO EL CODIRECTOR ni su pertenencia
-\codirector{John Doe} % para que aparezca en la portada se debe descomentar la opción codirector en el documentclass
-\pertenenciaCoDirector{FIUBA}
+\codirector{Ing. Guillermo Figini} % para que aparezca en la portada se debe descomentar la opción codirector en el documentclass
+\pertenenciaCoDirector{SOFSE - DNT}
 
 % Nombre del cliente, quien va a aprobar los resultados del proyecto, se puede usar con el comando \clientename y \empclientename
-\cliente{Nombre del cliente}
-\empresaCliente{Empresa del cliente}
+\cliente{Esp. Ing. Mariano Fernández Soler}
+\empresaCliente{CENADIF}
 
 % Nombre y pertenencia de los jurados, se pueden usar el cualquier lugar del documento con el comando \jurunoname, \jurdosname y \jurtresname y \perteunoname, \pertedosname y \pertetresname.
 \juradoUno{Nombre y Apellido (1)}
@@ -38,9 +38,9 @@ codirector, % Uncomment to add a codirector to the title page
 \juradoTres{Nombre y Apellido (3)}
 \pertenenciaJurTres{pertenencia (3)}
  
-\fechaINICIO{30 de abril de 2021}		%Fecha de inicio de la cursada de GdP \fechaInicioName
-\fechaFINALPlan{18 de junio de 2021} 	%Fecha de final de cursada de GdP
-\fechaFINALTrabajo{15 de mayo de 2022}	%Fecha de defensa pública del trabajo final
+\fechaINICIO{24 de junio de 2021}		%Fecha de inicio de la cursada de GdP \fechaInicioName
+\fechaFINALPlan{19 de agosto de 2021} 	%Fecha de final de cursada de GdP
+\fechaFINALTrabajo{20 de junio de 2022}	%Fecha de defensa pública del trabajo final
 
 
 \begin{document}
@@ -92,7 +92,7 @@ Buenos Aires, \fechaInicioName
 
 \vspace{2cm}
 
-Por medio de la presente se acuerda con el Ing. \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en \textcolor{red}{la implementación de un prototipo de un sistema de control de temperatura de un calefón}, y tendrá un presupuesto preliminar estimado de \textcolor{red}{600} hs de trabajo y \textcolor{red}{\$XXX}, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
+Por medio de la presente se acuerda con el \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en la implementación del prototipo de un sistema que gestionará la información y alarmas de las temperaturas relevantes de los pares montados de la locomotora, y tendrá un presupuesto preliminar estimado de \textcolor{red}{600} hs de trabajo y \textcolor{red}{\$XXX}, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
 
 Se adjunta a esta acta la planificación inicial.
 
@@ -102,7 +102,7 @@ Se adjunta a esta acta la planificación inicial.
 \begin{table}[ht]
 \centering
 \begin{tabular}{ccc}
-\begin{tabular}[c]{@{}c@{}}Ariel Lutenberg \\ Director posgrado FIUBA\end{tabular} & \hspace{2cm} & \begin{tabular}[c]{@{}c@{}}\clientename \\ \empclientename \end{tabular} \vspace{2.5cm} \\ 
+\begin{tabular}[c]{@{}c@{}}Dr. Ing. Ariel Lutenberg \\ Director posgrado FIUBA\end{tabular} & \hspace{2cm} & \begin{tabular}[c]{@{}c@{}}\clientename \\ \empclientename \end{tabular} \vspace{2.5cm} \\ 
 \multicolumn{3}{c}{\begin{tabular}[c]{@{}c@{}} \supname \\ Director del Trabajo Final\end{tabular}} \vspace{2.5cm} \\
 %\begin{tabular}[c]{@{}c@{}}\jurunoname \\ Jurado del Trabajo Final\end{tabular}     &  & \begin{tabular}[c]{@{}c@{}}\jurdosname\\ Jurado del Trabajo Final\end{tabular}  \vspace{2.5cm}  \\
 %\multicolumn{3}{c}{\begin{tabular}[c]{@{}c@{}} \jurtresname\\ Jurado del Trabajo Final\end{tabular}} \vspace{.5cm}                                                                     
@@ -115,58 +115,70 @@ Se adjunta a esta acta la planificación inicial.
 \section{1. Descripción técnica-conceptual del proyecto a realizar}
 \label{sec:descripcion}
 
+%Objetivo del sistema original.
+Las locomotoras CNR - CKD8 , incorporadas a la flota de Trenes Argentinos, tienen integrado en su equipamiento original un sistema denominado Hot Box.
+El objetivo principal del sistema es evitar la operación de la locomotora en una condición de sobretemperatura de rodamientos en los bogies que pueda desencadenar en una falla catastrófica.
+Para ello detecta la condición temprana de degradación mediante el monitoreo constante de la temperatura de operación en los puntos pasibles de falla.
 
-\begin{consigna}{red} % El bloque "consigna" se usa para poner texto en rojo y dar una pequeña ayuda sobre cómo completar la sección
-
-El objetivo es que el lector en una o dos páginas entienda de qué se trata el proyecto y cuáles son sus desafíos, su motivación y su importancia.
-
-Se debe destacar claramente cuál es el valor que agrega el proyecto a realizar. ``El presente proyecto se destaca especialmente por incorporar tal cosa... Esto lo diferencia de otros sistemas similares en que ...''
-
-Puede ser útil incluir en esta sección la respuesta a alguna de estas preguntas:
-
+%Descripción de sistema original.
+El sistema está compuesto por:
 \begin{itemize}
-	\item ¿Cómo se vincula este proyecto con la misión de la organización?
-	\item ¿Cómo se inserta este proyecto en el modelo de negocio de la organización?
-	\item ¿Ayuda a la explicación si se incluye un lienzo Canvas del Modelo de Negocio?
-	\item ¿En qué estado del ciclo de vida está el producto que se desea reemplazar o mejorar?
-	\item ¿Cuáles son las necesidades que debe satisfacer?
-	\item ¿Por dónde pasa la innovación?
+\item Dos cajas Hot Box ubicadas una en cada cabina de conducción, sobre el pupitre de mando. 
+\item Un bus de sensores, protocolo 1Wire.
+\item 36 sensores de temperatura, ubicados 6 en cada par montado.
+\item Una conexión de comunicación entre ambas Hot Box.
+\item Un conector frontal, ubicado en la Hot Box de la cabina 1, que permite la conexión de un sensor.
 \end{itemize}
-
-La descripción técnica-conceptual \textbf{debe incluir al menos un diagrama en bloques del sistema} y una frase como la siguiente: ``En la Figura \ref{fig:diagBloques} se presenta el diagrama en bloques del sistema. Se observa que...''. Luego recién más abajo de haber puesto esta frase, se pone la figura. La regla es que las figuras nunca pueden ir antes de ser mencionadas en el texto, porque sino el lector no entiende por qué de pronto aparece una figura.
-
-%\vspace{25px}
-
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=.5\textwidth]{./Figuras/diagBloques.png}
-\caption{Diagrama en bloques del sistema}
-\label{fig:diagBloques}
+La disposición de estos componentes se muestra esquemáticamente en la figura 1.
+\begin{figure}[h]
+	\centering
+	\includegraphics[angle=0,width=0.95\textwidth]{./Figuras/SMTB_bloques.pdf}
+	\caption{Diagrama en bloques del sistema}
+	\label{fig:mesh1}
 \end{figure}
 
-\vspace{25px}
+Si bien las cajas presentan funcionalidades distintas, ambas integran un microcontrolador, 5 teclas idénticas y presentan la información al conductor mediante un display de 7 segmentos, de 6 dígitos, y una matriz de LEDs de 6 x 6.
+Sus diferencias consisten en la conexión al bus y el conector frontal, que solo están implementados en la Hot Box 1.
 
-El tamaño de la tipografía en TODAS las figuras debe ser adecuado para que NO pase lo que ocurre acá, donde el lector debe esforzarse para poder leer el texto. Los colores usados en el diagrama deben ser adecuados, tal que ayuden a comprender mejor el diagrama, preferentemente en la gama de colores pastel.
-\end{consigna}
+%Problemas
+El sistema original adolece de diversos problemas a la hora de realizar su mantenimiento, a saber:
+\begin{itemize}
+\item Diseño cerrado. La información puesta a disposición por el fabricante para la reparación de los componentes es inexistente en los manuales provistos. Los repuestos disponibles para adquisición en la fábrica solo contemplan el recambio de unidades completas.
+\item Costos de reposición. Los repuestos deben importarse del país de origen, lo que impacta fuertemente en los costos de adquisición. El fabricante es, además, el único proveedor del sistema a nivel global.
+\item Soporte de postventa. El fabricante no provee la posibilidad de realizar cambios o mejoras al sistema. 
+\end{itemize}
 
+%Descripción del proyecto.
+Con la motivación de corregir estos problemas, se propone desarrollar un reemplazo del sistema de diseño propio, con la máxima integración de componentes nacionales posible y reutilizando la instalación existente en las locomotoras. Adicionalmente, este desarrollo permitirá la nacionalización de las cadenas de valor que siempre resulta ventajosa para el país. La designación del producto será Sistema de Monitoreo de Temperaturas de Bogies (SMTB).
 
+Especificamente, el desarrollo comprenderá el reemplazo de ambas unidades Hot Box por las que denominaremos Unidad de Control e Interfaz (UCI) y de los sensores de temperatura.
+Las UCI conservarán el factor de forma original y su alimentación eléctrica de manera que el reemplazo de sistema solo implique el recambio de las unidades, sin tener que intervenir la instalación existente. El hardware será rediseñado para utilizar la tecnología nacional seleccionada para el proyecto.
+
+El software embebido de las UCI (SUCI) contará con las funcionalidades actuales, más el agregado de algunas que mejorarán sus posibilidades de uso. Las funciones principales serán:
+\begin{itemize}
+\item El sistema deberá gestionar la información de los 36 sensores instalados en los bogies.
+	\item Registrará de manera no volátil (EEPROM) la correspondencia del ID de sensor con la ubicación en que se encuentra.
+	\item Presentará la información de temperatura y ubicación de la lectura al conductor de la locomotora.
+	\item Manejará las alarmas que se requieran para cada ubicación.
+	\item Permitirá la operación degradada (sensor/es o UCI fuera de servicio).
+	\item Proveerá soporte a las tareas de mantenimiento del sistema:
+	\begin{enumerate}
+	\item Lazo de autochequeo del sistema. Es la comprobación de la existencia y consistencia de registros de sensores en ambas UCI, y comunicación con los sensores registrados.
+	\item Alta de sensor nuevo (registro de ID y ubicación). 
+	\item Alta de UCI\#1 nueva (carga de registro EEPROM actual utilizando UCI\#2 como soporte).
+	\item Alta de UCI\#2 nueva. (carga de registro EEPROM actual utilizando UCI\#1 como soporte).
+	\end{enumerate}
+	\item Proveerá soporte a las tareas de mantenimiento mecánico de material rodante: 
+	\begin{enumerate}
+	\item Cambio de uno o ambos bogies. Esto requerirá un procedimiento de alta de sensores sin necesidad de desinstalarlos.
+	\item Instalación de UCI utilizada en otra locomotora. Esto requerirá un procedimiento para resolver el conflicto de configuración a nivel EEPROMs.   
+	\end{enumerate}
+\end{itemize}
+ 
 \section{2. Identificación y análisis de los interesados}
 \label{sec:interesados}
 
-\begin{consigna}{red} 
-Nota: (borrar esto y todas las consignas en color rojo antes de entregar este documento).
- 
-Es inusual que una misma persona esté en más de un rol, incluso en proyectos chicos.
- 
-Si se considera que una persona cumple dos o más roles, entonces sólo dejarla en el rol más importante. Por ejemplo:
-
-\begin{itemize}
-\item Si una persona es Cliente pero también colabora u orienta, dejarla solo como Cliente.
-\item Si una persona es el Responsable, no debe ser colocado también como Miembro del equipo.
-\end{itemize}
-
-Pero en cambio sí es usual que el Cliente y el Auspiciante sean el mismo, por ejemplo.
-
+%
 \begin{table}[ht]
 %\caption{Identificación de los interesados}
 %\label{tab:interesados}
@@ -174,75 +186,62 @@ Pero en cambio sí es usual que el Cliente y el Auspiciante sean el mismo, por e
 \hline
 \rowcolor[HTML]{C0C0C0} 
 Rol           & Nombre y Apellido & Organización 	& Puesto 	\\ \hline
-Auspiciante   &                   &              	&        	\\ \hline
-Cliente       & \clientename      &\empclientename	&        	\\ \hline
-Impulsor      &                   &              	&        	\\ \hline
+%Auspiciante   &                   &              	&        	\\ \hline
+Cliente       & \clientename      &\empclientename	&   Gte de Innovación\\ \hline
+%Impulsor      &                   &              	&        	\\ \hline
 Responsable   & \authorname       & FIUBA        	& Alumno 	\\ \hline
-Colaboradores &                   &              	&        	\\ \hline
-Orientador    & \supname	      & \pertesupname 	& Director Trabajo final \\ \hline
-Equipo        & miembro1 \newline 
-				miembro2          &              	&        	\\ \hline
-Opositores    &                   &              	&        	\\ \hline
-Usuario final &                   &              	&        	\\ \hline
+Colaboradores & Ing. Guillermo Figini&SOFSE - DNT  	& Codirector Trabajo Final\\ \hline
+Orientador    & \supname	      & \pertesupname 	& Director Trabajo Final \\ \hline
+Equipo        & Ing. Germán Zaupa \newline 
+				Esteban Landeira          &SOFSE - DNT        	&         	\\ \hline
+%Opositores    &                   &              	&        	\\ \hline
+Usuario final & Conductores y mecánicos de locomotoras&       	&        	\\ \hline
 \end{tabularx}
 \end{table}
 
-El Director suele ser uno de los Orientadores.
-
-No dejar celdas vacías; si no hay nada que poner en una celda colocar un signo ``-''.
-
-No dejar filas vacías; si no hay nada que poner en una fila entonces eliminarla.
-
-Es deseable listar a continuación las principales características de cada interesado.
- 
-Por ejemplo:
 \begin{itemize}
-	\item Auspiciante: es riguroso y exigente con la rendición de gastos. Tener mucho cuidado con esto.
-	\item Equipo: Juan Perez, suele pedir licencia porque tiene un familiar con una enfermedad. Planificar considerando esto.
-	\item Orientador: María Gómez va a poder ayudar mucho con la definición de los requerimientos.
+	\item Equipo: Ing.Germán Zaupa, estará a cargo del diseño mecánico de las UCI y los sensores.
+	\item Equipo: Esteban Landeira, coordinará las pruebas sobre locomotoras.
 \end{itemize}
-
-\end{consigna}
-
-
 
 \section{3. Propósito del proyecto}
 \label{sec:proposito}
 
-\begin{consigna}{red}
-¿Por qué se hace el proyecto? ¿Qué se quiere lograr? 
+El propósito de este proyecto es desarrollar un prototipo del sistema descripto que permita validar el diseño, ser homologado y producido localmente para su uso en las locomotoras de Trenes Argentinos. Adicionalmente, se pretende mejorar el soporte y la mantenibilidad del sistema durante su ciclo de vida.
 
-Se recomienda que sea solo un párrafo que empiece diciendo ``El propósito de este proyecto es...''.
-\end{consigna}
 
 \section{4. Alcance del proyecto}
 \label{sec:alcance}
 
-\begin{consigna}{red}
-¿Qué se incluye y que no se incluye en este proyecto?
+El proyecto incluye las siguientes actividades:
+\begin{itemize}
+\item Diseño del hardware (UCI\_1 y UCI\_2)(*1).
+\item Desarrollo del software(UCI\_1 y UCI\_2)(*1 y *2).
+\item Diseño de los componentes mecánicos (cajas UCI y encapsulado de sensores).
+\item Construcción de un prototipo.
+\item Pruebas de ajuste y aceptación.
+\end{itemize}
+No se incluyen las siguientes tareas: 
+\begin{itemize}
+\item El desarrollo de un sistema de control de temperatura de rodamientos.
+\item La producción en serie del sistema.
+\end{itemize}
+(*1) Se prevé la posibilidad de utilizar un solo hardware para ambas UCI, lo que permitiría reducir el stock de repuestos necesarios. En ese caso, un solo software debería cubrir ambas posibilidades con la incorporación de algún medio de selección del rol de la UCI. Por ejemplo, utilizar un jumper.
 
-Se refiere al trabajo a hacer para entregar el producto o resultado especificado. 
-
-Explicitar todo lo quede comprendido dentro del alcance del proyecto.
-
-Explicitar además todo lo que no quede incluido (``El presente proyecto no incluye...'')
-
-\end{consigna}
-
+(*2) Se prevé la posibilidad de utilizar un software que simule el funcionamiento de los periféricos para pruebas del sistema.
 
 \section{5. Supuestos del proyecto}
 \label{sec:supuestos}
 
-\begin{consigna}{red}
-``Para el desarrollo del presente proyecto se supone que: ...''
+Para el desarrollo del presente proyecto se supone que:
 
 \begin{itemize}
-	\item Supuesto 1
-	\item Supuesto 2...
+	\item Se va a contar con disponibilidad de dos unidades EDU-CIAA-NXP o CIAA-NXP en su defecto, como así también los componentes necesarios para el avance del proyecto.
+	\item Se va a contar con autorización y disponibilidad para realizar pruebas en locomotoras.
 \end{itemize}
 
-Por ejemplo, se podrían incluir supuestos respecto a disponibilidad de tiempo y recursos humanos y materiales, sobre la factibilidad técnica de distintos aspectos del proyecto, sobre otras cuestiones que sean necesarias para el éxito del proyecto como condiciones macroeconómicas o reglamentarias.
-\end{consigna}
+%Por ejemplo, se podrían incluir supuestos respecto a disponibilidad de tiempo y recursos humanos y materiales, sobre la factibilidad técnica de distintos aspectos del proyecto, sobre otras cuestiones que sean necesarias para el éxito del proyecto como condiciones macroeconómicas o reglamentarias.
+%\end{consigna}
 
 \section{6. Requerimientos}
 \label{sec:requerimientos}
