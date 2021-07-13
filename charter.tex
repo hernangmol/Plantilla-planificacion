@@ -7,7 +7,7 @@ codirector, % Uncomment to add a codirector to the title page
 
 
 % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
-\titulo{Sistema de Monitoreo de Temperaturas de Bogies - Locomotora CNR - CKD 8} 
+\titulo{Monitoreo Térmico de Bogies} 
 
 % Nombre del posgrado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
 \posgrado{Carrera de Especialización en Sistemas Embebidos} 
@@ -68,14 +68,11 @@ codirector, % Uncomment to add a codirector to the title page
 \hline
 \rowcolor[HTML]{C0C0C0} 
 Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios realizados} & Fecha      \\ \hline
-0      & Creación del documento                                 &\fechaInicioName \\ \hline
-%1      & Se completa hasta el punto 4 inclusive                 & dd/mm/aaaa \\ \hline
-%2      & Se completa hasta el punto 7 inclusive
-%		  Se puede agregar algo más \newline
-%		  En distintas líneas \newline
-%		  Así                                                    & dd/mm/aaaa \\ \hline
-%3      & Se completa hasta el punto 11 inclusive                & dd/mm/aaaa \\ \hline
-%4      & Se completa el plan	                                 & dd/mm/aaaa \\ \hline
+0      & Creación del documento.                                 &24/06/2021\\ \hline
+1      & Se completa hasta el punto 5 inclusive.                 & 08/07/2021 \\ \hline
+2      & Se cambio el título del documento.\newline
+		 Se actualizó el punto 5. Supuestos del proyecto.\newline  
+		 Se completa hasta el punto 9 inclusive.      		      & 15/07/2021 \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -92,7 +89,7 @@ Buenos Aires, \fechaInicioName
 
 \vspace{2cm}
 
-Por medio de la presente se acuerda con el \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en la implementación del prototipo de un sistema que gestionará la información y alarmas de las temperaturas relevantes de los pares montados de la locomotora, y tendrá un presupuesto preliminar estimado de \textcolor{red}{600} hs de trabajo y \textcolor{red}{\$XXX}, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
+Por medio de la presente se acuerda con el \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', que consistirá esencialmente en la implementación del prototipo de un sistema que gestionará la información y alarmas de las temperaturas relevantes de los pares montados de la locomotora, y tendrá un presupuesto preliminar estimado de 600 hs de trabajo y costo a definir, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
 
 Se adjunta a esta acta la planificación inicial.
 
@@ -116,16 +113,18 @@ Se adjunta a esta acta la planificación inicial.
 \label{sec:descripcion}
 
 %Objetivo del sistema original.
-Las locomotoras CNR - CKD8 , incorporadas a la flota de Trenes Argentinos, tienen integrado en su equipamiento original un sistema denominado Hot Box.
-El objetivo principal del sistema es evitar la operación de la locomotora en una condición de sobretemperatura de rodamientos en los bogies que pueda desencadenar en una falla catastrófica.
+Las locomotoras CNR - CKD8, incorporadas a la flota de Trenes Argentinos, tienen integrado en su equipamiento original un sistema denominado Hot Box.
+
+El objetivo principal del sistema es evitar la operación de la locomotora en una condición de sobretemperatura de rodamientos en los bogies (carros inferiores que contienen los ejes, sobre los que se soporta la carrocería) que pueda desencadenar en una falla catastrófica.
+
 Para ello detecta la condición temprana de degradación mediante el monitoreo constante de la temperatura de operación en los puntos pasibles de falla.
 
 %Descripción de sistema original.
 El sistema está compuesto por:
 \begin{itemize}
 \item Dos cajas Hot Box ubicadas una en cada cabina de conducción, sobre el pupitre de mando. 
-\item Un bus de sensores, protocolo 1Wire.
-\item 36 sensores de temperatura, ubicados 6 en cada par montado.
+\item Un bus sensores con protocolo 1Wire.
+\item 36 sensores de temperatura, ubicados 6 en cada par montado (conjunto de eje y ruedas).
 \item Una conexión de comunicación entre ambas Hot Box.
 \item Un conector frontal, ubicado en la Hot Box de la cabina 1, que permite la conexión de un sensor.
 \end{itemize}
@@ -133,7 +132,7 @@ La disposición de estos componentes se muestra esquemáticamente en la figura 1
 \begin{figure}[h]
 	\centering
 	\includegraphics[angle=0,width=0.95\textwidth]{./Figuras/SMTB_bloques.pdf}
-	\caption{Diagrama en bloques del sistema}
+	\caption{Diagrama en bloques del sistema.}
 	\label{fig:mesh1}
 \end{figure}
 
@@ -141,27 +140,27 @@ Si bien las cajas presentan funcionalidades distintas, ambas integran un microco
 Sus diferencias consisten en la conexión al bus y el conector frontal, que solo están implementados en la Hot Box 1.
 
 %Problemas
-El sistema original adolece de diversos problemas a la hora de realizar su mantenimiento, a saber:
+El sistema original adolece de diversos problemas a la hora de realizar su mantenimiento:
 \begin{itemize}
-\item Diseño cerrado. La información puesta a disposición por el fabricante para la reparación de los componentes es inexistente en los manuales provistos. Los repuestos disponibles para adquisición en la fábrica solo contemplan el recambio de unidades completas.
-\item Costos de reposición. Los repuestos deben importarse del país de origen, lo que impacta fuertemente en los costos de adquisición. El fabricante es, además, el único proveedor del sistema a nivel global.
-\item Soporte de postventa. El fabricante no provee la posibilidad de realizar cambios o mejoras al sistema. 
+\item Diseño cerrado: La información puesta a disposición por el fabricante para la reparación de los componentes es inexistente en los manuales provistos. Los repuestos disponibles para adquisición en la fábrica solo contemplan el recambio de unidades completas.
+\item Costos de reposición: Los repuestos deben importarse del país de origen, lo que impacta fuertemente en los costos de adquisición. El fabricante es, además, el único proveedor del sistema a nivel global.
+\item Soporte de postventa: El fabricante no provee la posibilidad de realizar cambios o mejoras al sistema. 
 \end{itemize}
 
 %Descripción del proyecto.
-Con la motivación de corregir estos problemas, se propone desarrollar un reemplazo del sistema de diseño propio, con la máxima integración de componentes nacionales posible y reutilizando la instalación existente en las locomotoras. Adicionalmente, este desarrollo permitirá la nacionalización de las cadenas de valor que siempre resulta ventajosa para el país. La designación del producto será Sistema de Monitoreo de Temperaturas de Bogies (SMTB).
+Con la motivación de corregir estos problemas, se propone desarrollar un reemplazo del sistema de diseño propio, con la máxima integración de componentes nacionales posible y reutilizando la instalación existente en las locomotoras. Adicionalmente, este desarrollo permitirá la nacionalización de las cadenas de valor que siempre resulta ventajosa para el país. 
 
-Especificamente, el desarrollo comprenderá el reemplazo de ambas unidades Hot Box por las que denominaremos Unidad de Control e Interfaz (UCI) y de los sensores de temperatura.
+Específicamente, el desarrollo comprenderá el reemplazo de ambas unidades Hot Box por las que se denominarán Unidad de Control e Interfaz (UCI) y los sensores de temperatura.
 Las UCI conservarán el factor de forma original y su alimentación eléctrica de manera que el reemplazo de sistema solo implique el recambio de las unidades, sin tener que intervenir la instalación existente. El hardware será rediseñado para utilizar la tecnología nacional seleccionada para el proyecto.
 
 El software embebido de las UCI (SUCI) contará con las funcionalidades actuales, más el agregado de algunas que mejorarán sus posibilidades de uso. Las funciones principales serán:
 \begin{itemize}
 \item El sistema deberá gestionar la información de los 36 sensores instalados en los bogies.
-	\item Registrará de manera no volátil (EEPROM) la correspondencia del ID de sensor con la ubicación en que se encuentra.
-	\item Presentará la información de temperatura y ubicación de la lectura al conductor de la locomotora.
-	\item Manejará las alarmas que se requieran para cada ubicación.
-	\item Permitirá la operación degradada (sensor/es o UCI fuera de servicio).
-	\item Proveerá soporte a las tareas de mantenimiento del sistema:
+	\item El sistema deberá registrar de manera no volátil (EEPROM) la correspondencia del ID de sensor con la ubicación en que se encuentra.
+	\item El sistema deberá presentar la información de temperatura y ubicación de la lectura al conductor de la locomotora.
+	\item El sistema deberá gestionar las alarmas que se requieran para cada ubicación.
+	\item El sistema permitirá la operación degradada (sensor/es o UCI fuera de servicio).
+	\item El sistema deberá proveer soporte a las tareas de mantenimiento del sistema:
 	\begin{enumerate}
 	\item Lazo de autochequeo del sistema. Es la comprobación de la existencia y consistencia de registros de sensores en ambas UCI, y comunicación con los sensores registrados.
 	\item Alta de sensor nuevo (registro de ID y ubicación). 
@@ -200,14 +199,17 @@ Usuario final & Conductores y mecánicos de locomotoras&       	&        	\\ \hl
 \end{table}
 
 \begin{itemize}
-	\item Equipo: Ing.Germán Zaupa, estará a cargo del diseño mecánico de las UCI y los sensores.
-	\item Equipo: Esteban Landeira, coordinará las pruebas sobre locomotoras.
+	\item Cliente, Esp. Ing. Mariano Fernández Soler: es el titular de CENADIF, organo requirente del proyecto.
+	\item Orientador, Esp. Ing. Martín Harris: posee amplia experiencia en sistemas electrónicos de uso ferroviario.
+	\item Colaborador, Ing. Guillermo Figini: posee amplia experiencia en material rodante ferroviario.
+	\item Equipo, Ing.Germán Zaupa: estará a cargo del diseño mecánico de las UCI y los sensores.
+	\item Equipo, Esteban Landeira: coordinará las pruebas sobre locomotoras.
 \end{itemize}
 
 \section{3. Propósito del proyecto}
 \label{sec:proposito}
 
-El propósito de este proyecto es desarrollar un prototipo del sistema descripto que permita validar el diseño, ser homologado y producido localmente para su uso en las locomotoras de Trenes Argentinos. Adicionalmente, se pretende mejorar el soporte y la mantenibilidad del sistema durante su ciclo de vida.
+El propósito de este proyecto es desarrollar un prototipo de un sistema de monitoreo de temperaturas de bogies que permita validar el diseño, ser homologado y producido localmente para su uso en las locomotoras de Trenes Argentinos. Adicionalmente, se pretende mejorar el soporte y la mantenibilidad del sistema durante su ciclo de vida.
 
 
 \section{4. Alcance del proyecto}
@@ -215,16 +217,16 @@ El propósito de este proyecto es desarrollar un prototipo del sistema descripto
 
 El proyecto incluye las siguientes actividades:
 \begin{itemize}
-\item Diseño del hardware (UCI\_1 y UCI\_2)(*1).
-\item Desarrollo del software(UCI\_1 y UCI\_2)(*1 y *2).
+\item Diseño del hardware (UCI\#1 y UCI\#2)(*1).
+\item Desarrollo del software(UCI\#1 y UCI\#2)(*1 y *2).
 \item Diseño de los componentes mecánicos (cajas UCI y encapsulado de sensores).
 \item Construcción de un prototipo.
 \item Pruebas de ajuste y aceptación.
 \end{itemize}
 No se incluyen las siguientes tareas: 
 \begin{itemize}
-\item El desarrollo de un sistema de control de temperatura de rodamientos.
-\item La producción en serie del sistema.
+\item Desarrollo de un sistema de control de temperatura de rodamientos.
+\item Producción en serie del sistema.
 \end{itemize}
 (*1) Se prevé la posibilidad de utilizar un solo hardware para ambas UCI, lo que permitiría reducir el stock de repuestos necesarios. En ese caso, un solo software debería cubrir ambas posibilidades con la incorporación de algún medio de selección del rol de la UCI. Por ejemplo, utilizar un jumper.
 
@@ -237,114 +239,197 @@ Para el desarrollo del presente proyecto se supone que:
 
 \begin{itemize}
 	\item Se va a contar con disponibilidad de dos unidades EDU-CIAA-NXP o CIAA-NXP en su defecto, como así también los componentes necesarios para el avance del proyecto.
+	\item Se va a contar con los componentes mecánicos necesarios para el proyecto (Cajas UCI, vainas y encapsulado de sensores, etc). 
 	\item Se va a contar con autorización y disponibilidad para realizar pruebas en locomotoras.
 \end{itemize}
 
-%Por ejemplo, se podrían incluir supuestos respecto a disponibilidad de tiempo y recursos humanos y materiales, sobre la factibilidad técnica de distintos aspectos del proyecto, sobre otras cuestiones que sean necesarias para el éxito del proyecto como condiciones macroeconómicas o reglamentarias.
-%\end{consigna}
 
 \section{6. Requerimientos}
 \label{sec:requerimientos}
 
-\begin{consigna}{red}
-Los requerimientos deben numerarse y de ser posible estar agruparlos por afinidad, por ejemplo:
+A continuación se listan los requerimientos del sistema acordados con el cliente, separados según correspondan a su diseño; funcionalidades; interfaz Hombre / Maquina; mantenimiento o documentación. Al lado de cada requerimiento se indica su prioridad entre paréntesis, siendo:
+\begin{itemize}
+	\item (1) Mandatorio.
+	\item (2) Necesario (debe implementarse, pero puede proponerse una alternativa).
+	\item (3) Deseable (puede no cumplirse, pero debe justificarse).
+	\item (4) Opcional.
+\end{itemize} 
 
 \begin{enumerate}
+	\item Requerimientos de diseño:
+		\begin{enumerate}
+			\item El sistema debe conservar el factor de forma de la unidades; alimentación eléctrica; conectores y cables del sistema original reemplazado.(1)
+			\item Los sensores deberán ser intercambiables con los del sistema reemplazado.(1)
+			\item La comunicación entre UCIs no podrá utilizar más de 4 conductores (6 existentes, 2 reservados para alimentación de la UCI\#2).(1)
+			\item Los modelos de UCI podrán ser intercambiables, incluyendo un medio de selección de la posición en que se instalan. Se debe prever además la inclusión en software de un algoritmo para resolución de conflictos por selección errónea.(4) 
+		\end{enumerate}
+		
 	\item Requerimientos funcionales
 		\begin{enumerate}
-			\item El sistema debe...
-			\item Tal componente debe...
-			\item El usuario debe poder...
-		\end{enumerate}
-	\item Requerimientos de documentación
-		\begin{enumerate}
-			\item Requerimiento 1
-			\item Requerimiento 2 (prioridad menor)
-		\end{enumerate}
-	\item Requerimiento de testing...
-	\item Requerimientos de la interfaz...
-	\item Requerimientos interoperabilidad...
-	\item etc...
+		\item El sistema gestionará un bus al que se conectan 36 sensores de temperatura tipo DS18B20 (bus\#1).(1)
+		\item Registrará de manera no volátil (EEPROM) la correspondencia del ID de sensor con la ubicación en que se encuentra, en ambas UCI.(2)
+		\item El sistema gestionará un bus al que se conectará un solo sensor a la vez, para permitir su alta individual en el registro ROM (bus\#2).(2)
+		\item Se debe permitir la operación degradada (sensores fuera de 				servicio; UCI\#2 fuera de servicio).(2)
+		\item El sistema evaluará la condición de alarma según el 						algoritmo a definir.(2)
+		\item La condición de alarma será informada por el sistema de 					manera visual y sonora.(1)
+		\item La alarma sonora tendrá la posibilidad de ser silenciada, 				volviendo a activarse ciclicamente, en tanto la condición de alarma continúe.(1)
+		\item La alarma visual no podrá ser desactivada, en tanto la 					condición de alarma continúe.(1)
+%		\item Las unidades UCI se comunicarán entre ellas a través de un puerto RS-485.
+		\item Las unidades UCI se comunicarán con los buses de sensores a través de un puerto OneWire.(1)
+%		\item Cada unidad UCI manejará un buzzer de alarma conectado a un puerto GPIO.
+		\item Cada unidad UCI contará con un display LCD de tipo gráfico o texto.(2)
+		\item Cada unidad UCI contará una matriz LED de 6 x 6, que se utilizará para mostrar ubicaciones (fila = número de eje / columna = número de sensor).(3)
+		
+		\item Cada unidad UCI contará con pulsadores, en número no menor a cuatro, para permitir el ingreso de opciones de menú o selección de ubicaciones por parte del usuario.(3)
+\item Cada unidad UCI contará con un pulsador (aparte de los requeridos en el item anterior para permitir el reset total del sistema.(3)
+\item Independientemente del tiempo que insuma el ciclo de visualización completo, el tiempo entre lecturas de una temperatura en particular no excederá los 60 segundos.(2)
+\item Se implementará una función de registro de alarmas (datalogging).(4)
 \end{enumerate}
 
-Leyendo los requerimientos se debe poder interpretar cómo será el proyecto y su funcionalidad.
 
-Indicar claramente cuál es la prioridad entre los distintos requerimientos y si hay requerimientos opcionales. 
 
-No olvidarse de que los requerimientos incluyen a las regulaciones y normas vigentes!!!
+		\item Requerimientos de la interfaz Hombre / Maquina.
+		
+\begin{enumerate}
+\item El sistema mostrará los mensajes de estados y menúes en el display LCD, utilizando texto.(2)
+\item El sistema mostrará la información referente a estado del sensor mediante la matriz LED, siendo encendido fijo el LED correspondiente a la temperatura mostrada en display y encendido en intermitente el que corresponda a un sensor fuera de servicio.(3)
+\item El sistema no se limitará a mostrar las ubicaciones solo en la matriz LED. Lo hará además en el display LCD, mediante texto.(4)
+\end{enumerate}
 
-Y al escribirlos seguir las siguientes reglas:
-\begin{itemize}
-	\item Ser breve y conciso (nadie lee cosas largas). 
-	\item Ser específico: no dejar lugar a confusiones.
-	\item Expresar los requerimientos en términos que sean cuantificables y medibles.
-\end{itemize}
+		
+		\item Requerimientos de mantenimiento.
+\begin{enumerate}
+\item El sistema evaluará su condición de funcionamiento (comunicación entre UCIs; comunicación con sensores; existencia y consistencia de registros ROM; alta de sensores en ROM) e informará su estado.(2)
+\item El autochequeo se realizará automáticamente al iniciar el sistema y a requerimiento del usuario.(2) 
+\item Se utilizarán las memorias ROM de ambas UCI como respaldo de la otra, para facilitar el alta de todos los sensores ante el cambio de una UCI.(2)
+\item Se proveerá soporte para un procedimiento de alta de sensor (registro de ID y su ubicación).(2)
+\item El alta de sensor podrá realizarse de manera individual por el bus\#2; o de manera secuencial para todos los sensores instalados por el bus\#1 (bus normal de trabajo de los sensores).(2) 
+\end{enumerate}		
 
-\end{consigna}
+\item Requerimientos de documentación.
+\begin{enumerate}
+\item El sistema se proveerá con su manual de operación.(1)
+\item El sistema se proveerá con su manual de mantenimiento.(2) 
+\end{enumerate}		
+
+
+%	\item Requerimientos interoperabilidad...
+%	\item etc...
+\end{enumerate}
 
 \section{7. Historias de usuarios (\textit{Product backlog})}
 \label{sec:backlog}
 
-\begin{consigna}{red}
-Descripción: En esta sección se deben incluir las historias de usuarios y su ponderación (\textit{history points}). Recordar que las historias de usuarios son descripciones cortas y simples de una característica contada desde la perspectiva de la persona que desea la nueva capacidad, generalmente un usuario o cliente del sistema. La ponderación es un número entero que representa el tamaño de la historia comparada con otras historias de similar tipo.
+A continuación se presentan cinco historias de usuarios con sus respectivas ponderaciones de esfuerzo relativo (story points).
 
-El formato propuesto es: "como [rol] quiero [tal cosa] para [tal otra cosa]."
+Para su cálculo se utiliza la siguiente expresión:
 
-Se debe indicar explícitamente el criterio para calcular los \textit{story points} de cada historia
-\end{consigna}
+\begin{equation}
+SP = Fibo (\textbf{PtCarga} + 1,5.\textbf{PtCompl} + 2.\textbf{PtIncert})
+\end{equation}
+siendo:
+
+SP - story points.
+
+Fibo - función que asigna el número de Fibonacci más cercano al argumento.
+
+PtCarga - puntaje por carga de trabajo (1 a 5).
+
+PtCompl - puntaje por complejidad (1 a 5).
+
+PtIncert - puntaje por incertidumbre (1 a 5).
+
+Notesé que los puntajes son multiplicados por factores de ponderación, antes de ser sumados.
+
+\begin{itemize}
+
+\item Historia de usuario 1
+
+''Como conductor quiero elegir la temperatura que visualizo, para hacer su seguimiento."\newline (PtCarga = 2; PtCompl = 1; PtIncert = 1; \textbf{[SP=5]}).
+
+
+\item Historia de usuario 2
+
+''Como mecánico quiero registrar el nuevo sensor antes de reemplazarlo para que todo el recambio no demore más de diez minutos."\newline (PtCarga = 3; PtCompl = 2; PtIncert = 1; \textbf{[SP=8]}).
+
+\item Historia de usuario 3
+
+''Como conductor quiero realizar un diagnóstico del sistema para asegurar su estado de operación ."\newline (PtCarga = 3; PtCompl = 3; PtIncert = 2; \textbf{[SP=13]}).
+
+\item Historia de usuario 4
+
+''Como conductor quiero silenciar la alarma sonora para evitar trabajar incómodo."\newline (PtCarga = 1; PtCompl = 1; PtIncert = 1; \textbf{[SP=5]}).
+
+\item Historia de usuario 5
+
+''Como mecánico quiero reemplazar cualquiera de las UCI sin que se borre el registro de sensores para que el recambio no demore más de diez minutos."\newline (PtCarga = 2,5; PtCompl = 2; PtIncert = 1,5; \textbf{[SP=8]}).
+
+\end{itemize}
 
 \section{8. Entregables principales del proyecto}
 \label{sec:entregables}
 
-\begin{consigna}{red}
-
-Los entregables del proyecto son (ejemplo):
+Los entregables del proyecto son:
 
 \begin{itemize}
-	\item Manual de uso
-	\item Diagrama de circuitos esquemáticos
-	\item Código fuente del firmware
-	\item Diagrama de instalación
-	\item Informe final
-	\item etc...
+	\item Prototipo del sistema (UCI\#1 y UCI\#2)
+	\item Manual de operación.
+	\item Manual de mantenimiento.
+	\item Memoria del trabajo
 \end{itemize}
 
-\end{consigna}
 
 \section{9. Desglose del trabajo en tareas}
 \label{sec:wbs}
 
-\begin{consigna}{red}
-El WBS debe tener relación directa o indirecta con los requerimientos.  Son todas las actividades que se harán en el proyecto para dar cumplimiento a los requerimientos. Se recomienda mostrar el WBS mediante una lista indexada:
+%\begin{consigna}{red}
+%El WBS debe tener relación directa o indirecta con los requerimientos.  Son todas las actividades que se harán en el proyecto para dar cumplimiento a los requerimientos. Se recomienda mostrar el WBS mediante una lista indexada:
 
 \begin{enumerate}
-\item Grupo de tareas 1
+\item Gestión del proyecto (152 hs)
 	\begin{enumerate}
-	\item Tarea 1 (tantas hs)
-	\item Tarea 2 (tantas hs)
-	\item Tarea 3 (tantas hs)
+	\item Elicitación de requerimientos (4 hs).
+	\item Planificación (20 hs).
+	\item Informe de avance (16 hs).
+	\item Preparación de la memoria (40 hs).
+	\item Redacción de la memoria (40 hs).
+	\item Presentación del trabajo (32 hs).
 	\end{enumerate}
-\item Grupo de tareas 2
+\item Firmware (162 hs)
 	\begin{enumerate}
-	\item Tarea 1 (tantas hs)
-	\item Tarea 2 (tantas hs)
-	\item Tarea 3 (tantas hs)
+	\item Diseño conceptual (8 hs).
+	\item Arquitectura (24 hs).
+	\item Preparación toolchain (10 hs).
+	\item Módulos de manejo de hardware (30 hs).
+	\item Funciones de operación normal (30 hs).
+	\item Funciones de alarmas (24 hs).
+	\item Funciones de mantenimiento (36 hs)
 	\end{enumerate}
-\item Grupo de tareas 3
+\item Hardware (136 hs)
 	\begin{enumerate}
-	\item Tarea 1 (tantas hs)
-	\item Tarea 2 (tantas hs)
-	\item Tarea 3 (tantas hs)
-	\item Tarea 4 (tantas hs)
-	\item Tarea 5 (tantas hs)
+	\item Diagrama en bloques (12 hs).
+	\item Selección de componentes (16 hs).
+	\item Gestión de componentes (16 hs).
+	\item Diseño del circuito (20 hs).
+	\item Diseño de cicuito impreso (pcb) (40 hs).
+	\item Implementación de circuito impreso (32 hs).
+	\end{enumerate}
+\item Pruebas (148 hs)
+	\begin{enumerate}
+	\item Verificación por módulos (40 hs).
+	\item Montaje de prototipo (36 hs).
+	\item Emulación de sensores (40 hs).
+	\item Validación (32 hs).
+	\end{enumerate}
+\item Documentación (28 hs)
+	\begin{enumerate}
+	\item Manual de usuario (12 hs).
+	\item Manual de mantenimiento (16 hs).
 	\end{enumerate}
 \end{enumerate}
 
-Cantidad total de horas: (tantas hs)
+Cantidad total de horas: (626 hs).
 
-Se recomienda que no haya ninguna tarea que lleve más de 40 hs. 
-
-\end{consigna}
 
 \section{10. Diagrama de Activity On Node}
 \label{sec:AoN}
