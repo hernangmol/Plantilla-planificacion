@@ -7,7 +7,7 @@ codirector, % Uncomment to add a codirector to the title page
 
 
 % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
-\titulo{Monitoreo Térmico de Bogies} 
+\titulo{Sistema de Monitoreo Térmico de Bogies} 
 
 % Nombre del posgrado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
 \posgrado{Carrera de Especialización en Sistemas Embebidos} 
@@ -73,6 +73,8 @@ Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios 
 2      & Se cambio el título del documento.\newline
 		 Se actualizó el punto 5. Supuestos del proyecto.\newline  
 		 Se completa hasta el punto 9 inclusive.      		      & 15/07/2021 \\ \hline
+3     & Se cambio cambió la designación de prioridades del punto 6.\newline 
+		 Se completa hasta el punto 12 inclusive.      		      & 29/07/2021 \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -142,9 +144,9 @@ Sus diferencias consisten en la conexión al bus y el conector frontal, que solo
 %Problemas
 El sistema original adolece de diversos problemas a la hora de realizar su mantenimiento:
 \begin{itemize}
-\item Diseño cerrado: La información puesta a disposición por el fabricante para la reparación de los componentes es inexistente en los manuales provistos. Los repuestos disponibles para adquisición en la fábrica solo contemplan el recambio de unidades completas.
-\item Costos de reposición: Los repuestos deben importarse del país de origen, lo que impacta fuertemente en los costos de adquisición. El fabricante es, además, el único proveedor del sistema a nivel global.
-\item Soporte de postventa: El fabricante no provee la posibilidad de realizar cambios o mejoras al sistema. 
+\item Diseño cerrado: la información puesta a disposición por el fabricante para la reparación de los componentes es inexistente en los manuales provistos. Los repuestos disponibles para adquisición en la fábrica solo contemplan el recambio de unidades completas.
+\item Costos de reposición: los repuestos deben importarse del país de origen, lo que impacta fuertemente en los costos de adquisición. El fabricante es, además, el único proveedor del sistema a nivel global.
+\item Soporte de postventa: el fabricante no provee la posibilidad de realizar cambios o mejoras al sistema. 
 \end{itemize}
 
 %Descripción del proyecto.
@@ -167,7 +169,7 @@ El software embebido de las UCI (SUCI) contará con las funcionalidades actuales
 	\item Alta de UCI\#1 nueva (carga de registro EEPROM actual utilizando UCI\#2 como soporte).
 	\item Alta de UCI\#2 nueva. (carga de registro EEPROM actual utilizando UCI\#1 como soporte).
 	\end{enumerate}
-	\item Proveerá soporte a las tareas de mantenimiento mecánico de material rodante: 
+	\item Deberá proveer soporte a las tareas de mantenimiento mecánico de material rodante: 
 	\begin{enumerate}
 	\item Cambio de uno o ambos bogies. Esto requerirá un procedimiento de alta de sensores sin necesidad de desinstalarlos.
 	\item Instalación de UCI utilizada en otra locomotora. Esto requerirá un procedimiento para resolver el conflicto de configuración a nivel EEPROMs.   
@@ -199,7 +201,7 @@ Usuario final & Conductores y mecánicos de locomotoras&       	&        	\\ \hl
 \end{table}
 
 \begin{itemize}
-	\item Cliente, Esp. Ing. Mariano Fernández Soler: es el titular de CENADIF, organo requirente del proyecto.
+	\item Cliente, Esp. Ing. Mariano Fernández Soler: es el titular de CENADIF, órgano promotor del proyecto.
 	\item Orientador, Esp. Ing. Martín Harris: posee amplia experiencia en sistemas electrónicos de uso ferroviario.
 	\item Colaborador, Ing. Guillermo Figini: posee amplia experiencia en material rodante ferroviario.
 	\item Equipo, Ing.Germán Zaupa: estará a cargo del diseño mecánico de las UCI y los sensores.
@@ -238,83 +240,87 @@ No se incluyen las siguientes tareas:
 Para el desarrollo del presente proyecto se supone que:
 
 \begin{itemize}
-	\item Se va a contar con disponibilidad de dos unidades EDU-CIAA-NXP o CIAA-NXP en su defecto, como así también los componentes necesarios para el avance del proyecto.
-	\item Se va a contar con los componentes mecánicos necesarios para el proyecto (Cajas UCI, vainas y encapsulado de sensores, etc). 
-	\item Se va a contar con autorización y disponibilidad para realizar pruebas en locomotoras.
+	\item Se contará con disponibilidad de dos unidades EDU-CIAA-NXP o CIAA-NXP en su defecto, como así también los componentes necesarios para el avance del proyecto.
+	\item Se contará con los componentes mecánicos necesarios para el proyecto (Cajas UCI, vainas de sensores y su encapsulado, etc). 
+	\item Se contará con autorización y disponibilidad para realizar pruebas en locomotoras.
 \end{itemize}
 
 
 \section{6. Requerimientos}
 \label{sec:requerimientos}
 
-A continuación se listan los requerimientos del sistema acordados con el cliente, separados según correspondan a su diseño; funcionalidades; interfaz Hombre / Maquina; mantenimiento o documentación. Al lado de cada requerimiento se indica su prioridad entre paréntesis, siendo:
+A continuación se listan los requerimientos del sistema acordados con el cliente, separados según correspondan a su diseño, funcionalidades, interfaz Hombre/Máquina, mantenimiento o documentación. Al lado de cada requerimiento se indica su prioridad entre corchetes, siendo:
 \begin{itemize}
-	\item (1) Mandatorio.
-	\item (2) Necesario (debe implementarse, pero puede proponerse una alternativa).
-	\item (3) Deseable (puede no cumplirse, pero debe justificarse).
-	\item (4) Opcional.
+	\item [[ P1]]: mandatorio.
+	\item [[ P2]]: necesario (debe implementarse, pero puede proponerse una alternativa).
+	\item [[ P3]]: deseable (puede no cumplirse, pero debe justificarse).
+	\item [[ P4]]: opcional.
 \end{itemize} 
 
 \begin{enumerate}
 	\item Requerimientos de diseño:
 		\begin{enumerate}
-			\item El sistema debe conservar el factor de forma de la unidades; alimentación eléctrica; conectores y cables del sistema original reemplazado.(1)
-			\item Los sensores deberán ser intercambiables con los del sistema reemplazado.(1)
-			\item La comunicación entre UCIs no podrá utilizar más de 4 conductores (6 existentes, 2 reservados para alimentación de la UCI\#2).(1)
-			\item Los modelos de UCI podrán ser intercambiables, incluyendo un medio de selección de la posición en que se instalan. Se debe prever además la inclusión en software de un algoritmo para resolución de conflictos por selección errónea.(4) 
+			\item El sistema debe conservar el factor de forma de la unidades, alimentación eléctrica, conectores y cables del sistema original reemplazado [P1].
+			\item Los sensores deberán ser intercambiables con los del sistema reemplazado [P1].
+			\item La comunicación entre UCIs no podrá utilizar más de 4 conductores (6 existentes, 2 reservados para alimentación de la UCI\#2) [P1].
+			\item Los modelos de UCI podrán ser intercambiables, incluyendo un medio de selección de la posición en que se instalan. Se debe incluir en el software un algoritmo para resolución de conflictos por selección errónea [P4]. 
 		\end{enumerate}
 		
 	\item Requerimientos funcionales
 		\begin{enumerate}
-		\item El sistema gestionará un bus al que se conectan 36 sensores de temperatura tipo DS18B20 (bus\#1).(1)
-		\item Registrará de manera no volátil (EEPROM) la correspondencia del ID de sensor con la ubicación en que se encuentra, en ambas UCI.(2)
-		\item El sistema gestionará un bus al que se conectará un solo sensor a la vez, para permitir su alta individual en el registro ROM (bus\#2).(2)
-		\item Se debe permitir la operación degradada (sensores fuera de 				servicio; UCI\#2 fuera de servicio).(2)
-		\item El sistema evaluará la condición de alarma según el 						algoritmo a definir.(2)
-		\item La condición de alarma será informada por el sistema de 					manera visual y sonora.(1)
-		\item La alarma sonora tendrá la posibilidad de ser silenciada, 				volviendo a activarse ciclicamente, en tanto la condición de alarma continúe.(1)
-		\item La alarma visual no podrá ser desactivada, en tanto la 					condición de alarma continúe.(1)
+		\item El sistema deberá gestionar un bus al que se conectan 36 sensores de temperatura tipo DS18B20 (bus\#1) [P1].
+		\item Deberá registrar de manera no volátil (EEPROM) la correspondencia del ID de sensor con la ubicación en que se encuentra, en ambas UCI [P2].
+		\item El sistema deberá gestionar un bus al que se conectará un solo sensor a la vez, para permitir su alta individual en el registro ROM (bus\#2) [P2].
+		\item Se deberá permitir la operación degradada (sensores fuera de 				servicio y/o UCI\#2 fuera de servicio) [P2].
+		\item El sistema deberá evaluar la condición de alarma según el 						algoritmo a definir [P2].
+		\item La condición de alarma deberá ser informada por el sistema de 					manera visual y sonora [P1].
+		\item La alarma sonora tendrá la posibilidad de ser silenciada, 				volviendo a activarse cíclicamente, en tanto la condición de alarma continúe [P1].
+		\item La alarma visual no podrá ser desactivada, en tanto la 					condición de alarma continúe [P1].
 %		\item Las unidades UCI se comunicarán entre ellas a través de un puerto RS-485.
-		\item Las unidades UCI se comunicarán con los buses de sensores a través de un puerto OneWire.(1)
+		\item Las unidades UCI deberán comunicarse con los buses de sensores a través del protocolo OneWire [P1].
 %		\item Cada unidad UCI manejará un buzzer de alarma conectado a un puerto GPIO.
-		\item Cada unidad UCI contará con un display LCD de tipo gráfico o texto.(2)
-		\item Cada unidad UCI contará una matriz LED de 6 x 6, que se utilizará para mostrar ubicaciones (fila = número de eje / columna = número de sensor).(3)
+		\item Cada unidad UCI deberá contar con un display LCD de tipo gráfico o texto [P2].
+		\item Cada unidad UCI deberá contar una matriz LED de 6 x 6, que se utilizará para mostrar ubicaciones correspondiendo cada fila al número de eje y cada columna al número de sensor [P3].
 		
-		\item Cada unidad UCI contará con pulsadores, en número no menor a cuatro, para permitir el ingreso de opciones de menú o selección de ubicaciones por parte del usuario.(3)
-\item Cada unidad UCI contará con un pulsador (aparte de los requeridos en el item anterior para permitir el reset total del sistema.(3)
-\item Independientemente del tiempo que insuma el ciclo de visualización completo, el tiempo entre lecturas de una temperatura en particular no excederá los 60 segundos.(2)
-\item Se implementará una función de registro de alarmas (datalogging).(4)
+		\item Cada unidad UCI deberá contar con pulsadores, en número no menor a cuatro, para permitir el ingreso de opciones de menú o selección de ubicaciones por parte del usuario [P3].
+\item Cada unidad UCI deberá contar con un pulsador (aparte de los requeridos en el item anterior para permitir el reset total del sistema [P3].
+\item El tiempo entre actualización de un dato de temperatura en particular no deberá exceder los 60 segundos [P2].
+\item Se deberá contar con una función de registro de alarmas (datalogging) [P4].
 \end{enumerate}
 
 
 
-		\item Requerimientos de la interfaz Hombre / Maquina.
+		\item Requerimientos de la interfaz Hombre/Máquina.
 		
 \begin{enumerate}
-\item El sistema mostrará los mensajes de estados y menúes en el display LCD, utilizando texto.(2)
-\item El sistema mostrará la información referente a estado del sensor mediante la matriz LED, siendo encendido fijo el LED correspondiente a la temperatura mostrada en display y encendido en intermitente el que corresponda a un sensor fuera de servicio.(3)
-\item El sistema no se limitará a mostrar las ubicaciones solo en la matriz LED. Lo hará además en el display LCD, mediante texto.(4)
+\item El sistema deberá mostrar los mensajes de estados y menúes en el display LCD, mediante texto [P2].
+\item El sistema deberá mostrar información referente al estado del sensor mediante la matriz LED. Para ello, encenderá de modo fijo el LED correspondiente a la temperatura mostrada en display y de modo intermitente el que corresponda a un sensor fuera de servicio [P3].
+\item El sistema no se limitará a mostrar las ubicaciones solo en la matriz LED. Lo hará además en el display LCD, mediante texto [P4].
 \end{enumerate}
 
 		
 		\item Requerimientos de mantenimiento.
 \begin{enumerate}
-\item El sistema evaluará su condición de funcionamiento (comunicación entre UCIs; comunicación con sensores; existencia y consistencia de registros ROM; alta de sensores en ROM) e informará su estado.(2)
-\item El autochequeo se realizará automáticamente al iniciar el sistema y a requerimiento del usuario.(2) 
-\item Se utilizarán las memorias ROM de ambas UCI como respaldo de la otra, para facilitar el alta de todos los sensores ante el cambio de una UCI.(2)
-\item Se proveerá soporte para un procedimiento de alta de sensor (registro de ID y su ubicación).(2)
-\item El alta de sensor podrá realizarse de manera individual por el bus\#2; o de manera secuencial para todos los sensores instalados por el bus\#1 (bus normal de trabajo de los sensores).(2) 
+\item El sistema deberá evaluar su condición de funcionamiento e informar su estado [P2]. Como mínimo deberá incluirse:
+\begin {itemize}
+	\item comunicación entre UCIs
+	\item comunicación con sensores
+	\item existencia y consistencia de registros ROM
+	\item alta de sensores en ROM).
+\end{itemize}
+\item El autochequeo se realizará automáticamente al iniciar el sistema y a requerimiento del usuario [P2]. 
+\item Se utilizarán las memorias ROM de ambas UCI como respaldo de la otra, para facilitar el alta de todos los sensores ante el cambio de una UCI [P2].
+\item Se proveerá soporte para un procedimiento de alta de sensor (registro de ID y su ubicación) [P2].
+\item El alta de sensor podrá realizarse de manera individual por el bus\#2; o de manera secuencial para todos los sensores instalados por el bus\#1 (bus normal de trabajo de los sensores) [P2]. 
 \end{enumerate}		
 
 \item Requerimientos de documentación.
 \begin{enumerate}
-\item El sistema se proveerá con su manual de operación.(1)
-\item El sistema se proveerá con su manual de mantenimiento.(2) 
+\item El sistema se proveerá con su manual de operación [P1].
+\item El sistema se proveerá con su manual de mantenimiento [P2]. 
 \end{enumerate}		
 
 
-%	\item Requerimientos interoperabilidad...
-%	\item etc...
 \end{enumerate}
 
 \section{7. Historias de usuarios (\textit{Product backlog})}
@@ -345,24 +351,24 @@ Notesé que los puntajes son multiplicados por factores de ponderación, antes d
 
 \item Historia de usuario 1
 
-''Como conductor quiero elegir la temperatura que visualizo, para hacer su seguimiento."\newline (PtCarga = 2; PtCompl = 1; PtIncert = 1; \textbf{[SP=5]}).
+''Como conductor quiero elegir la temperatura que visualizo para hacer su seguimiento".\newline (PtCarga = 2; PtCompl = 1; PtIncert = 1; \textbf{[SP=5]}).
 
 
 \item Historia de usuario 2
 
-''Como mecánico quiero registrar el nuevo sensor antes de reemplazarlo para que todo el recambio no demore más de diez minutos."\newline (PtCarga = 3; PtCompl = 2; PtIncert = 1; \textbf{[SP=8]}).
+''Como mecánico quiero registrar el nuevo sensor antes de reemplazarlo para que todo el recambio no demore más de diez minutos". \newline (PtCarga = 3; PtCompl = 2; PtIncert = 1; \textbf{[SP=8]}).
 
 \item Historia de usuario 3
 
-''Como conductor quiero realizar un diagnóstico del sistema para asegurar su estado de operación ."\newline (PtCarga = 3; PtCompl = 3; PtIncert = 2; \textbf{[SP=13]}).
+''Como conductor quiero realizar un diagnóstico del sistema para asegurar su estado de operación". \newline (PtCarga = 3; PtCompl = 3; PtIncert = 2; \textbf{[SP=13]}).
 
 \item Historia de usuario 4
 
-''Como conductor quiero silenciar la alarma sonora para evitar trabajar incómodo."\newline (PtCarga = 1; PtCompl = 1; PtIncert = 1; \textbf{[SP=5]}).
+''Como conductor quiero silenciar la alarma sonora para evitar trabajar incómodo". \newline (PtCarga = 1; PtCompl = 1; PtIncert = 1; \textbf{[SP=5]}).
 
 \item Historia de usuario 5
 
-''Como mecánico quiero reemplazar cualquiera de las UCI sin que se borre el registro de sensores para que el recambio no demore más de diez minutos."\newline (PtCarga = 2,5; PtCompl = 2; PtIncert = 1,5; \textbf{[SP=8]}).
+''Como mecánico quiero reemplazar cualquiera de las UCI sin que se borre el registro de sensores para que el recambio no demore más de diez minutos". \newline (PtCarga = 2,5; PtCompl = 2; PtIncert = 1,5; \textbf{[SP=8]}).
 
 \end{itemize}
 
@@ -372,10 +378,10 @@ Notesé que los puntajes son multiplicados por factores de ponderación, antes d
 Los entregables del proyecto son:
 
 \begin{itemize}
-	\item Prototipo del sistema (UCI\#1 y UCI\#2)
+	\item Prototipo del sistema (UCI\#1 y UCI\#2).
 	\item Manual de operación.
 	\item Manual de mantenimiento.
-	\item Memoria del trabajo
+	\item Memoria del trabajo.
 \end{itemize}
 
 
@@ -399,11 +405,11 @@ Los entregables del proyecto son:
 	\begin{enumerate}
 	\item Diseño conceptual (8 hs).
 	\item Arquitectura (24 hs).
-	\item Preparación toolchain (10 hs).
+	\item Preparación del toolchain (10 hs).
 	\item Módulos de manejo de hardware (30 hs).
 	\item Funciones de operación normal (30 hs).
 	\item Funciones de alarmas (24 hs).
-	\item Funciones de mantenimiento (36 hs)
+	\item Funciones de mantenimiento (36 hs).
 	\end{enumerate}
 \item Hardware (136 hs)
 	\begin{enumerate}
@@ -434,97 +440,73 @@ Cantidad total de horas: (626 hs).
 \section{10. Diagrama de Activity On Node}
 \label{sec:AoN}
 
-\begin{consigna}{red}
-Armar el AoN a partir del WBS definido en la etapa anterior. 
+Dado que el proyecto se realizará con un solo recurso humano, todas las tareas pertenecen al camino crítico.
 
-%La figura \ref{fig:AoN} fue elaborada con el paquete latex tikz y pueden consultar la siguiente referencia \textit{online}:
+Referencia de colores:  
 
-%\url{https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ:_A_Tutorial_for_Beginners_(Part_3)\%E2\%80\%94Creating_Flowcharts}
-
-\end{consigna}
 
 \begin{figure}[htpb]
-\centering 
-\includegraphics[width=.8\textwidth]{./Figuras/AoN.png}
-\caption{Diagrama en \textit{Activity on Node}}
+%\centering 
+\includegraphics[width=.25\textwidth]{./Figuras/SMTB_refAoN.pdf}
+%\caption{Diagrama en \textit{Activity on Node}}
 \label{fig:AoN}
 \end{figure}
 
-Indicar claramente en qué unidades están expresados los tiempos.
-De ser necesario indicar los caminos semicríticos y analizar sus tiempos mediante un cuadro.
-Es recomendable usar colores y un cuadro indicativo describiendo qué representa cada color, como se muestra en el siguiente ejemplo:
 
+
+
+
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=.8\textwidth]{./Figuras/SMTB_AoN.pdf}
+\caption{Diagrama en \textit{Activity on Node}}
+\label{fig:AoN}
+\end{figure}
 
 
 \section{11. Diagrama de Gantt}
 \label{sec:gantt}
 
-\begin{consigna}{red}
+Para la elaboración del diagrama de Gantt se consideró una dedicación diaria de 3 horas, de lunes a viernes.
 
-Existen muchos programas y recursos \textit{online} para hacer diagramas de gantt, entre los cuales destacamos:
+Se utilizó el programa gratuito GanttProject, que solo permite la utilización de días como unidad de tiempo. por lo que se pueden observar algunas diferencias de redondeo en el diagrama.
 
-\begin{itemize}
-\item Planner
-\item GanttProject
-\item Trello + \textit{plugins}. En el siguiente link hay un tutorial oficial: \\ \url{https://blog.trello.com/es/diagrama-de-gantt-de-un-proyecto}
-\item Creately, herramienta online colaborativa. \\\url{https://creately.com/diagram/example/ieb3p3ml/LaTeX}
-\item Se puede hacer en latex con el paquete \textit{pgfgantt}\\ \url{http://ctan.dcc.uchile.cl/graphics/pgf/contrib/pgfgantt/pgfgantt.pdf}
-\end{itemize}
-
-Pegar acá una captura de pantalla del diagrama de Gantt, cuidando que la letra sea suficientemente grande como para ser legible. 
-Si el diagrama queda demasiado ancho, se puede pegar primero la ``tabla'' del Gantt y luego pegar la parte del diagrama de barras del diagrama de Gantt.
-
-Configurar el software para que en la parte de la tabla muestre los códigos del EDT (WBS).\\
-Configurar el software para que al lado de cada barra muestre el nombre de cada tarea.\\
-Revisar que la fecha de finalización coincida con lo indicado en el Acta Constitutiva.
-
-En la figura \ref{fig:gantt}, se muestra un ejemplo de diagrama de gantt realizado con el paquete de \textit{pgfgantt}. En la plantilla pueden ver el código que lo genera y usarlo de base para construir el propio.
-
-\begin{figure}[htbp]
-\begin{center}
-\begin{ganttchart}{1}{12}
-  \gantttitle{2020}{12} \\
-  \gantttitlelist{1,...,12}{1} \\
-  \ganttgroup{Group 1}{1}{7} \\
-  \ganttbar{Task 1}{1}{2} \\
-  \ganttlinkedbar{Task 2}{3}{7} \ganttnewline
-  \ganttmilestone{Milestone o hito}{7} \ganttnewline
-  \ganttbar{Final Task}{8}{12}
-  \ganttlink{elem2}{elem3}
-  \ganttlink{elem3}{elem4}
-\end{ganttchart}
-\end{center}
-\caption{Diagrama de gantt de ejemplo}
-\label{fig:gantt}
-\end{figure}
+La planificación se presenta en dos partes para mayor claridad.
 
 
 \begin{landscape}
 \begin{figure}[htpb]
 \centering 
-\includegraphics[height=.85\textheight]{./Figuras/Gantt-2.png}
-\caption{Ejemplo de diagrama de Gantt rotado}
+\includegraphics
+[scale=0.65]
+%[width=.99\textwidth]
+%[height=.99\textheight]
+{./Figuras/SMTB_Gantt_1.png}
+\caption{SMTB - Diagrama de Gantt (parte 1 de 2)}
 \label{fig:diagGantt}
 \end{figure}
 
 \end{landscape}
 
-\end{consigna}
+\begin{landscape}
+\begin{figure}[htpb]
+\centering 
+\includegraphics
+[scale=0.5]
+%[width=.99\textwidth]
+%[height=.99\textheight]
+{./Figuras/SMTB_Gantt_2.png}
+\caption{SMTB - Diagrama de Gantt (parte 2 de 2)}
+\label{fig:diagGantt}
+\end{figure}
+
+\end{landscape}
 
 
 \section{12. Presupuesto detallado del proyecto}
 \label{sec:presupuesto}
 
-\begin{consigna}{red}
-Si el proyecto es complejo entonces separarlo en partes:
-\begin{itemize}
-	\item Un total global, indicando el subtotal acumulado por cada una de las áreas.
-	\item El desglose detallado del subtotal de cada una de las áreas.
-\end{itemize}
-
-IMPORTANTE: No olvidarse de considerar los COSTOS INDIRECTOS.
-
-\end{consigna}
+Para el cálculo del presupuesto se estimo el valor global de los costos indirectos en un 40\% de los costos directos.  
 
 \begin{table}[htpb]
 \centering
@@ -533,52 +515,78 @@ IMPORTANTE: No olvidarse de considerar los COSTOS INDIRECTOS.
 \rowcolor[HTML]{C0C0C0} 
 \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}COSTOS DIRECTOS} \\ \hline
 \rowcolor[HTML]{C0C0C0} 
+\multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}Materiales} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
 Descripción &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Cantidad} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor unitario} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor total} \\ \hline
- &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} \\ \hline
- &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
+ CIAA-NXP &
+  \multicolumn{1}{c|}{2} &
+  \multicolumn{1}{c|}{\$ 45.000} &
+  \multicolumn{1}{c|}{\$ 90.000} \\ \hline
+ Sensor con vaina, conector y cápsula &
+  \multicolumn{1}{c|}{36} &
+  \multicolumn{1}{c|}{\$ 2.600} &
+  \multicolumn{1}{c|}{\$ 93.600} \\ \hline
+  
+ Gabinete de chapa plegada y máscara &
+  \multicolumn{1}{c|}{2} &
+  \multicolumn{1}{c|}{\$ 7.500} &
+  \multicolumn{1}{c|}{\$ 15.000} \\ \hline
+  
+  PCB &
+  \multicolumn{1}{c|}{1} &
+  \multicolumn{1}{c|}{\$ 20.000} &
+  \multicolumn{1}{c|}{\$ 20.000} \\ \hline
+  
+  Display &
+  \multicolumn{1}{c|}{2} &
+  \multicolumn{1}{c|}{\$ 2.000} &
+  \multicolumn{1}{c|}{\$ 4.000} \\ \hline
+  
+  Componentes adicionales &
+  \multicolumn{1}{c|}{1} &
+  \multicolumn{1}{c|}{\$ 10.000} &
+  \multicolumn{1}{c|}{\$ 10.000} \\ \hline
+  
+
 \multicolumn{3}{|c|}{SUBTOTAL} &
-  \multicolumn{1}{c|}{} \\ \hline
+  \multicolumn{1}{c|}{\$ 232.600} \\ \hline
+  
+\multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}Mano de obra} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+Descripción &
+  \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Cantidad} &
+  \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor unitario} &
+  \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor total} \\ \hline
+ Ingeniería &
+  \multicolumn{1}{c|}{542 hs} &
+  \multicolumn{1}{c|}{\$ 1.080} &
+  \multicolumn{1}{c|}{\$ 585.360} \\ \hline
+  
+ Otras tareas &
+  \multicolumn{1}{c|}{84 hs} &
+  \multicolumn{1}{c|}{\$ 1.080} &
+  \multicolumn{1}{c|}{\$ 90.720} \\ \hline
+  
+\multicolumn{3}{|c|}{SUBTOTAL} &
+  \multicolumn{1}{c|}{\$ 676.080} \\ \hline  
+  
 \rowcolor[HTML]{C0C0C0} 
 \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}COSTOS INDIRECTOS} \\ \hline
+
 \rowcolor[HTML]{C0C0C0} 
-Descripción &
-  \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Cantidad} &
-  \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor unitario} &
+\multicolumn{3}{|l|}{Descripción} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor total} \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
-\multicolumn{3}{|c|}{SUBTOTAL} &
-  \multicolumn{1}{c|}{} \\ \hline
+\multicolumn{3}{|l|}{Estimado global (40\% C.D.)} & \multicolumn{1}{c|}{\$ 363.472 } \\ \hline
+
+
+\multicolumn{3}{|c|}{SUBTOTAL} &  
+  \multicolumn{1}{c|}{\$ 363.472 } \\ \hline
 \rowcolor[HTML]{C0C0C0}
 \multicolumn{3}{|c|}{TOTAL} &
-   \\ \hline
+  \multicolumn{1}{c|}{\$ 1.272.152 } \\ \hline
 \end{tabularx}%
 \end{table}
 
