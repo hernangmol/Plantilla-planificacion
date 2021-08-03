@@ -74,7 +74,9 @@ Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios 
 		 Se actualizó el punto 5. Supuestos del proyecto.\newline  
 		 Se completa hasta el punto 9 inclusive.      		      & 15/07/2021 \\ \hline
 3     & Se cambio cambió la designación de prioridades del punto 6.\newline 
-		 Se completa hasta el punto 12 inclusive.      		      & 29/07/2021 \\ \hline
+		 Se completa hasta el punto 12 inclusive.      		      & 23/07/2021 \\ \hline
+4     & Se actualizó el punto 5. Supuestos del proyecto.\newline 
+		 Se completa la totalidad del documento.      		      & 03/08/2021 \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -91,7 +93,7 @@ Buenos Aires, \fechaInicioName
 
 \vspace{2cm}
 
-Por medio de la presente se acuerda con el \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', que consistirá esencialmente en la implementación del prototipo de un sistema que gestionará la información y alarmas de las temperaturas relevantes de los pares montados de la locomotora, y tendrá un presupuesto preliminar estimado de 600 hs de trabajo y costo a definir, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
+Por medio de la presente se acuerda con el \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', que consistirá esencialmente en la implementación del prototipo de un sistema que gestionará la información y alarmas de las temperaturas relevantes de los pares montados de la locomotora, y tendrá un presupuesto preliminar estimado de 600 hs de trabajo y \$ 1.272.152, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
 
 Se adjunta a esta acta la planificación inicial.
 
@@ -241,8 +243,10 @@ Para el desarrollo del presente proyecto se supone que:
 
 \begin{itemize}
 	\item Se contará con disponibilidad de dos unidades EDU-CIAA-NXP o CIAA-NXP en su defecto, como así también los componentes necesarios para el avance del proyecto.
-	\item Se contará con los componentes mecánicos necesarios para el proyecto (Cajas UCI, vainas de sensores y su encapsulado, etc). 
+	\item Se contará con los componentes mecánicos necesarios para el proyecto (Cajas UCI, vainas de sensores y su encapsulado, etc).
+	\item Se contará con los convertidores DC/DC a utilizarse dentro de las UCI. 
 	\item Se contará con autorización y disponibilidad para realizar pruebas en locomotoras.
+	\item El incremento de los costos de material estará dentro de los rangos de las previsiones publicadas por los organismos oficiales.
 \end{itemize}
 
 
@@ -294,7 +298,7 @@ A continuación se listan los requerimientos del sistema acordados con el client
 		
 \begin{enumerate}
 \item El sistema deberá mostrar los mensajes de estados y menúes en el display LCD, mediante texto [P2].
-\item El sistema deberá mostrar información referente al estado del sensor mediante la matriz LED. Para ello, encenderá de modo fijo el LED correspondiente a la temperatura mostrada en display y de modo intermitente el que corresponda a un sensor fuera de servicio [P3].
+\item El sistema deberá mostrar información referente al estado del sensor mediante la matriz LED. Para ello, deberá encender de modo fijo el LED correspondiente a la temperatura mostrada en display y de modo intermitente el que corresponda a un sensor fuera de servicio [P3].
 \item El sistema no se limitará a mostrar las ubicaciones solo en la matriz LED. Lo hará además en el display LCD, mediante texto [P4].
 \end{enumerate}
 
@@ -316,8 +320,8 @@ A continuación se listan los requerimientos del sistema acordados con el client
 
 \item Requerimientos de documentación.
 \begin{enumerate}
-\item El sistema se proveerá con su manual de operación [P1].
-\item El sistema se proveerá con su manual de mantenimiento [P2]. 
+\item El sistema deberá proveerse con su manual de operación [P1].
+\item El sistema deberá proveerse con su manual de mantenimiento [P2]. 
 \end{enumerate}		
 
 
@@ -442,34 +446,19 @@ Cantidad total de horas: (626 hs).
 
 Dado que el proyecto se realizará con un solo recurso humano, todas las tareas pertenecen al camino crítico.
 
-Referencia de colores:  
-
-
-\begin{figure}[htpb]
-%\centering 
-\includegraphics[width=.25\textwidth]{./Figuras/SMTB_refAoN.pdf}
-%\caption{Diagrama en \textit{Activity on Node}}
-\label{fig:AoN}
-\end{figure}
-
-
-
-
-
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=.8\textwidth]{./Figuras/SMTB_AoN.pdf}
+\includegraphics[width=.9\textwidth]{./Figuras/SMTB_AoN.pdf}
 \caption{Diagrama en \textit{Activity on Node}}
 \label{fig:AoN}
 \end{figure}
-
 
 \section{11. Diagrama de Gantt}
 \label{sec:gantt}
 
 Para la elaboración del diagrama de Gantt se consideró una dedicación diaria de 3 horas, de lunes a viernes.
 
-Se utilizó el programa gratuito GanttProject, que solo permite la utilización de días como unidad de tiempo. por lo que se pueden observar algunas diferencias de redondeo en el diagrama.
+Se utilizó el programa gratuito GanttProject, que solo permite la utilización de días como unidad de tiempo. Por esta razón, se pueden observar algunas diferencias de redondeo en el diagrama.
 
 La planificación se presenta en dos partes para mayor claridad.
 
@@ -593,103 +582,322 @@ Descripción &
 
 \section{13. Gestión de riesgos}
 \label{sec:riesgos}
+\subsection*{Análisis}
 
-\begin{consigna}{red}
-a) Identificación de los riesgos (al menos cinco) y estimación de sus consecuencias:
+A continuación se presentan los riesgos identificados para el proyecto junto con sus puntuaciones de:
+\begin{enumerate}
+\renewcommand{\theenumi}{\alph{enumi}} %Letras minúsculas 
+	\item severidad (S), del 1 al 10, siendo 10 el grado más alto de importancia para sus consecuencias.
+	\item ocurrencia (O), del 1 al 10, siendo 10 el grado más alto de probabilidad de ocurrencia.
+	\item nivel de prioridad de riesgo (RPN), que se calcula como el producto de los anteriores y representa un nivel relativo de importancia que permite comparar riesgos. 
+\end{enumerate}  
+
+
+%--------------------------------------------------------------------------------------------------
+\textbf{Riesgo 1:} subestimación de los tiempos de ejecución de tareas.
+		\begin{itemize}
+			\item Severidad (5): severidad media, dado que permite un cierto nivel de corrección.
+			\item Ocurrencia (5): probabilidad media, por falta de experiencia en la estimación de tiempos de desarrollo de software. 
+		\end{itemize}
+%-------------------------------------------------------------------------------------------------
+\textbf{Riesgo 2:} imposibilidad de adquirir el convertidor DC/DC de alimentación.
+		\begin{itemize}
+			\item Severidad (5): severidad media, dado que permite un cierto nivel de corrección.
+			\item Ocurrencia (7): probabilidad moderada, dado que no existe proveedor local y no 	es de uso masivo. 
+		\end{itemize} 
+%-------------------------------------------------------------------------------------------------  
+\textbf{Riesgo 3:} dificultad en la importación de los conectores.
+		\begin{itemize}
+			\item Severidad (7): severidad moderada, dado que son necesarios para la 				compatibilidad con los sensores actuales.
+			\item Ocurrencia (5): probabilidad media, dado que no existe proveedor local pero 		existen algunos importadores. 
+		\end{itemize} 
+%------------------------------------------------------------------------------------------------
+\textbf{Riesgo 4:} inestabilidad del master OneWire a implementar por software.
+		\begin{itemize}
+			\item Severidad (5): severidad media, porque afecta a una funcionalidad principal pero admite corrección por hardware.
+			\item Ocurrencia (4): probabilidad media-baja, dado que se conocen implementaciones exitosas en otras plataformas. 
+		\end{itemize}   
+%-------------------------------------------------------------------------------------------------
+\textbf{Riesgo 5:} obtención de confiabilidad baja del producto.
+		\begin{itemize}
+			\item Severidad (8): severidad moderada-alta, porque afecta a la eficacia total del sistema.
+			\item Ocurrencia (3): probabilidad baja, dado que se utiliza tecnología similar al sistema original con confiabilidad aceptada. 
+		\end{itemize}   
+%-------------------------------------------------------------------------------------------------	
+\textbf{Riesgo 6:} pérdida de las herramientas de trabajo.
+		\begin{itemize}
+			\item Severidad (9): severidad alta, porque se posee un solo equipo dedicado al proyecto.
+			\item Ocurrencia (3): probabilidad baja, dado que el equipo solo se transporta excepcionalmente.
+		\end{itemize}   
+%-------------------------------------------------------------------------------------------------
+\textbf{Riesgo 7:} pérdida de los avances realizados en el desarrollo.
+		\begin{itemize}
+			\item Severidad (8): severidad moderada-alta, porque dependiendo del momento de la pérdida puede penalizar fuertemente el cronograma de trabajo.
+			\item Ocurrencia (1): probabilidad muy baja, dado que se almacenará el trabajo en un repositorio en linea y con control de versiones.
+		\end{itemize}   
+%-------------------------------------------------------------------------------------------------
+\textbf{Riesgo 8:} cambio significativo de los costos presupuestados de materiales.
+		\begin{itemize}
+			\item Severidad (6): severidad media-moderada, porque el peso presupuestario de los materiales es relativamente bajo.
+			\item Ocurrencia (5): probabilidad media, dadas las proyecciones económicas disponibles.
+		\end{itemize}   
+%------------------------------------------------------------------------------------------------
+
+\subsection*{Plan de mitigación}
+
+Se adopta el criterio de tomar acciones de mitigación para aquellos riesgos que superen los 25 puntos RPN.Ver cuadro 1.
  
-Riesgo 1: detallar el riesgo (riesgo es algo que si ocurre altera los planes previstos de forma negativa)
-\begin{itemize}
-	\item Severidad (S): mientras más severo, más alto es el número (usar números del 1 al 10).\\
-	Justificar el motivo por el cual se asigna determinado número de severidad (S).
-	\item Probabilidad de ocurrencia (O): mientras más probable, más alto es el número (usar del 1 al 10).\\
-	Justificar el motivo por el cual se asigna determinado número de (O). 
-\end{itemize}   
-
-Riesgo 2:
-\begin{itemize}
-	\item Severidad (S): 
-	\item Ocurrencia (O):
-\end{itemize}
-
-Riesgo 3:
-\begin{itemize}
-	\item Severidad (S): 
-	\item Ocurrencia (O):
-\end{itemize}
-
-
-b) Tabla de gestión de riesgos:      (El RPN se calcula como RPN=SxO)
-
 \begin{table}[htpb]
 \centering
-\begin{tabularx}{\linewidth}{@{}|X|c|c|c|c|c|c|@{}}
+\begin{tabularx}{\linewidth}{@{}|c|X|c|c|c|c|c|c|@{}}
 \hline
-\rowcolor[HTML]{C0C0C0} 
-Riesgo & S & O & RPN & S* & O* & RPN* \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
-       &   &   &     &    &    &      \\ \hline
+\rowcolor[HTML]{C0C0C1} 
+N & Riesgo & S & O & RPN & S* & O* & RPN* \\ \hline
+1& Subestimación de los tiempos de ejecución de tareas& 5 & 5 & 25 &    &    &      \\ \hline
+2& Imposibilidad de adquirir el convertidor DC/DC de alimentación& 5& 7&\cellcolor[rgb]{1,.4,0} 35& 5& 2& \cellcolor[rgb]{0,0.7,0}10 \\ \hline
+3& Dificultad en la importación de los conectores& 7& 5&\cellcolor[rgb]{1,.4,0} 35& 7& 1& \cellcolor[rgb]{0,0.7,0}7      \\ \hline
+4& Inestabilidad del master OneWire a implementar por software& 5& 4& 20&    &    &      \\ \hline
+5& Obtención de confiabilidad baja del producto& 8& 3& 24&    &    &      \\ \hline
+6& Pérdida de las herramientas de trabajo& 9& 3&\cellcolor[rgb]{1,.4,0} 27& 3& 3&\cellcolor[rgb]{0,0.7,0} 9  \\ \hline
+7& Pérdida de los avances realizados en el desarrollo& 8& 1& 8&    &    &      \\ \hline
+8& Cambio significativo de los costos presupuestados de materiales& 6& 5&\cellcolor[rgb]{1,.4,0} 30& 5& 4& \cellcolor[rgb]{0,0.7,0} 20   \\ \hline
 \end{tabularx}%
+\caption{Comparación de riesgos.}
 \end{table}
-
-Criterio adoptado: 
-Se tomarán medidas de mitigación en los riesgos cuyos números de RPN sean mayores a...
 
 Nota: los valores marcados con (*) en la tabla corresponden luego de haber aplicado la mitigación.
 
-c) Plan de mitigación de los riesgos que originalmente excedían el RPN máximo establecido:
+\textbf{Riesgo 2:} se tendrá alistado un diseño alternativo de convertidor con componentes discretos de fácil consecución, para usar solo en prototipos.
+  \begin{itemize}
+		\item Severidad (5): sin cambios.
+		\item Ocurrencia (2): probabilidad baja, se mejoran las posibilidades de adquisición. 
+		\end{itemize} 
+\textbf{Riesgo 3:} se convendrá con el cliente la provisión de conectores reutilizables, para usar solo en prototipos.
+  \begin{itemize}
+		\item Severidad (7): sin cambios.
+		\item Ocurrencia (1): probabilidad muy baja, se asegura la disponibilidad. 
+		\end{itemize}
  
-Riesgo 1: plan de mitigación (si por el RPN fuera necesario elaborar un plan de mitigación).
-  Nueva asignación de S y O, con su respectiva justificación:
-  - Severidad (S): mientras más severo, más alto es el número (usar números del 1 al 10).
-          Justificar el motivo por el cual se asigna determinado número de severidad (S).
-  - Probabilidad de ocurrencia (O): mientras más probable, más alto es el número (usar del 1 al 10).
-          Justificar el motivo por el cual se asigna determinado número de (O).
-
-Riesgo 2: plan de mitigación (si por el RPN fuera necesario elaborar un plan de mitigación).
- 
-Riesgo 3: plan de mitigación (si por el RPN fuera necesario elaborar un plan de mitigación).
-
-\end{consigna}
-
+\textbf{Riesgo 6:} se contratará un seguro que cubra la pérdida de la computadora laptop de trabajo.
+  \begin{itemize}
+		\item Severidad (3): se asegura una alternativa en un tiempo relativamente corto ante la pérdida del equipo.
+		\item Ocurrencia (3): sin cambios.
+		\end{itemize}
+		
+\textbf{Riesgo 8:} se priorizarán las tareas de selección y adquisición de materiales, y se agrega a los supuestos del proyecto, de manera de concientizar al cliente de este riesgo.
+  \begin{itemize}
+		\item Severidad (5): se transfiere parte del impacto al cliente al participarlo del riesgo.
+		\item Ocurrencia (4): se minimizan los tiempos hasta la adquisición y por ende la probabilidad de ocurrencia. 
+		\end{itemize}
 
 \section{14. Gestión de la calidad}
 \label{sec:calidad}
-
-\begin{consigna}{red}
-Para cada uno de los requerimientos del proyecto indique:
+A continuación se detallan los procedimientos de verificación y validación para cada requerimiento: 
+% Req 1.1----------------------------------------------------------------------------------
 \begin{itemize} 
-\item Req \#1: copiar acá el requerimiento.
-
+\item Requerimiento 1.1.: el sistema debe conservar el factor de forma de la unidades, alimentación eléctrica, conectores y cables del sistema original reemplazado.
 \begin{itemize}
-	\item Verificación para confirmar si se cumplió con lo requerido antes de mostrar el sistema al cliente. Detallar 
-	\item Validación con el cliente para confirmar que está de acuerdo en que se cumplió con lo requerido. Detallar  
+	\item Verificación: finalizada la etapa de diseño se verificarán las medidas mecánicas y características eléctricas y se plasmarán en un informe de compatibilidad. 
+	\item Validación: para realizar las pruebas funcionales el sistema se armará completamente, lo que confirmará la compatibilidad. 
+\end{itemize}
+% Req 1.2----------------------------------------------------------------------------------
+\item Requerimiento 1.2.: los sensores deberán ser intercambiables con los del sistema reemplazado.
+\begin{itemize}
+	\item Verificación: se realizará el análisis de un sensor actual con el fin de identificarlo y relevar las características mecánicas de su implementación. 
+	\item Validación: se realizarán pruebas funcionales con sensores actuales instalados.
+\end{itemize}
+% Req 1.3----------------------------------------------------------------------------------
+\item Requerimiento 1.3.: la comunicación entre UCIs no podrá utilizar más de 4 conductores (6 existentes, 2 reservados para alimentación de la UCI\#2).
+\begin{itemize}
+	\item Verificación: se analizará al momento de la determinación del tipo de comunicación a utilizar entre UCIs.
+	\item Validación: se incluirá en la prueba funcional de comunicación. 
+\end{itemize}
+% Req 1.4----------------------------------------------------------------------------------
+\item Requerimiento 1.4.: los modelos de UCI podrán ser intercambiables, incluyendo un medio de selección de la posición en que se instalan. Se debe incluir en el software un algoritmo para resolución de conflictos por selección errónea. 
+\begin{itemize}
+	\item Verificación: se realizará una prueba de banco donde se armará todo el sistema fuera de la locomotora (mock up) e incluirá este item.
+	\item Validación: Se incluirá en las pruebas funcionales el intercambio de las UCI y el seteo erróneo ex profeso para validar la resolución del conflicto. 
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.1.: el sistema deberá gestionar un bus al que se conectan 36 sensores de temperatura tipo DS18B20 (bus\#1).  
+\begin{itemize}
+	\item Verificación: se incluirá en las pruebas de mock up.  
+	\item Validación: se incluirá en las pruebas de funcionales.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.2.: deberá registrar de manera no volátil (EEPROM) la correspondencia del ID de sensor con la ubicación en que se encuentra, en ambas UCI. 
+\begin{itemize}
+	\item Verificación: se realizarán pruebas de ubicación calentando individualmente los sensores del mock up. 
+	\item Validación: se realizarán pruebas de ubicación calentando individualmente los sensores de la locomotora. 
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.3.: el sistema deberá gestionar un bus al que se conectará un solo sensor a la vez, para permitir su alta individual en el registro ROM (bus\#2).  
+\begin{itemize}
+	\item Verificación: se realizará pruebas de alta en el mock up. 
+	\item Validación: se realizará pruebas de alta en la locomotora.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.4.: se deberá permitir la operación degradada (sensores fuera de 				servicio y/o UCI\#2 fuera de servicio). 
+\begin{itemize}
+	\item Verificación: se realizarán pruebas desconectando sensores o UCI, según corresponda, en el mock up.
+	\item Validación: se realizarán pruebas desconectando sensores o UCI, según corresponda, en la locomotora.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.5.: el sistema deberá evaluar la condición de alarma según el algoritmo a definir. 
+\begin{itemize}
+	\item Verificación: se realizarán pruebas de alarma emulando sensores en el mock up. 
+	\item Validación: se realizarán pruebas calentando sensores en la locomotora.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.6.: la condición de alarma deberá ser informada por el sistema de	manera visual y sonora. 
+\begin{itemize}
+	\item Verificación: se incluirán en las pruebas de verificación del requerimiento 2.5.
+	\item Validación: se incluirán en las pruebas de validación del requerimiento 2.5.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.7.: la alarma sonora tendrá la posibilidad de ser silenciada, 				volviendo a activarse cíclicamente, en tanto la condición de alarma continúe. 
+\begin{itemize}
+	\item Verificación: se incluirá en las pruebas de verificación del requerimiento 2.5.
+	\item Validación: se incluirá en las pruebas de validación del requerimiento 2.5.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.8.: la alarma visual no podrá ser desactivada, en tanto la condición de alarma continúe.  
+\begin{itemize}
+	\item Verificación: se incluirá en las pruebas de verificación del requerimiento 2.5.
+	\item Validación: se incluirá en las pruebas de validación del requerimiento 2.5.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.9.: las unidades UCI deberán comunicarse con los buses de sensores a través del protocolo OneWire. 
+\begin{itemize}
+	\item Verificación: se realizará prueba individual de módulo de software de protocolo OneWire.
+	\item Validación: está incluido en las pruebas de funcionamiento.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.10.: cada unidad UCI deberá contar con un display LCD de tipo gráfico o texto. 
+\begin{itemize}
+	\item Verificación: incluido en las pruebas individuales de módulo de software HMI. 
+	\item Validación: incluido en las pruebas funcionales.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.11.: cada unidad UCI deberá contar una matriz LED de 6 x 6, que se utilizará para mostrar ubicaciones correspondiendo cada fila al número de eje y cada columna al número de sensor. 
+\begin{itemize}
+	\item Verificación: incluido en las pruebas individuales de módulo de software HMI. 
+	\item Validación:  incluido en las pruebas funcionales.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.12.: cada unidad UCI deberá contar con pulsadores, en número no menor a cuatro, para permitir el ingreso de opciones de menú o selección de ubicaciones por parte del usuario. 
+\begin{itemize}
+	\item Verificación: se incluirá en las pruebas individuales de módulo de software HMI. 
+	\item Validación: se incluirá en las pruebas funcionales.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.13.:  Cada unidad UCI deberá contar con un pulsador (aparte de los requeridos en el item anterior para permitir el reset total del sistema. 
+\begin{itemize}
+	\item Verificación: se verificará en la selección de hardware. 
+	\item Validación: incluido en las pruebas funcionales.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.14.: El tiempo entre actualización de un dato de temperatura en particular no deberá exceder los 60 segundos.
+\begin{itemize}
+	\item Verificación: se incluirá en el software una señalización para permitir la medición (mock up).
+	\item Validación: se mostrará la prueba de verificación al cliente, dada la imposibilidad de validar en funcionamiento normal.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 2.15.: Se deberá contar con una función de registro de alarmas (datalogging).  
+\begin{itemize}
+	\item Verificación: se incluirá en las pruebas de verificación del requerimiento 2.5.
+	\item Validación: se incluirá en las pruebas de validación del requerimiento 2.5. 
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 3.1.: El sistema deberá mostrar los mensajes de estados y menúes en el display LCD, mediante texto.  
+\begin{itemize}
+	\item Verificación: se incluirá en las pruebas individuales de módulo de software HMI. 
+	\item Validación: se incluirá en las pruebas funcionales.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 3.2.: El sistema deberá mostrar información referente al estado del sensor mediante la matriz LED. Para ello, encenderá de modo fijo el LED correspondiente a la temperatura mostrada en display y de modo intermitente el que corresponda a un sensor fuera de servicio. 
+\begin{itemize}
+	\item Verificación: se incluirá en las pruebas individuales de módulo de software HMI. 
+	\item Validación: se incluirá en las pruebas funcionales.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 3.3.: El sistema no se limitará a mostrar las ubicaciones solo en la matriz LED. Lo hará además en el display LCD, mediante texto.  
+\begin{itemize}
+	\item Verificación: se incluirá en las pruebas individuales de módulo de software HMI. 
+	\item Validación: se incluirá en las pruebas funcionales.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 4.1.: El sistema deberá evaluar su condición de funcionamiento e informar su estado. Como mínimo deberá incluirse:
+\begin{enumerate}
+\renewcommand{\theenumi}{\alph{enumi}} %Letras minúsculas 
+	\item comunicación entre UCIs
+	\item comunicación con sensores
+	\item existencia y consistencia de registros ROM
+	\item alta de sensores en ROM).
+\end{enumerate}  
+\begin{itemize}
+	\item Verificación: se incluirá en las pruebas individuales de módulos de software. 
+	\item Validación: se incluirá en las pruebas funcionales.
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 4.2.: El autochequeo se realizará automáticamente al iniciar el sistema y a requerimiento del usuario.  
+\begin{itemize}
+	\item Verificación: se incluirá en las pruebas individuales de módulos de software. 
+	\item Validación: se incluirá en las pruebas funcionales. 
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 4.3.: Se utilizarán las memorias ROM de ambas UCI como respaldo de la otra, para facilitar el alta de todos los sensores ante el cambio de una UCI. 
+\begin{itemize}
+	\item Verificación: se incluirá en las pruebas individuales de módulos de software. 
+	\item Validación: se incluirá en las pruebas funcionales. 
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 4.4.: Se proveerá soporte para un procedimiento de alta de sensor (registro de ID y su ubicación).  
+\begin{itemize}
+	\item Verificación: 
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 4.5.: El alta de sensor podrá realizarse de manera individual por el bus\#2; o de manera secuencial para todos los sensores instalados por el bus\#1 (bus normal de trabajo de los sensores). 
+\begin{itemize}
+	\item Verificación: se incluirá en las pruebas individuales de módulos de software. 
+	\item Validación: se incluirá en las pruebas funcionales. 
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 5.1.: El sistema se proveerá con su manual de operación. 
+\begin{itemize}
+	\item Verificación: se verificará la inclusión en la planificación.
+	\item Validación: esta incluido en los entregables de proyecto. 
+\end{itemize}
+% Req 2.1----------------------------------------------------------------------------------
+\item Requerimiento 5.2.: El sistema se proveerá con su manual de mantenimiento. 
+\begin{itemize}
+	\item Verificación: se verificará la inclusión en la planificación.
+	\item Validación: esta incluido en los entregables de proyecto. 
 \end{itemize}
 
 \end{itemize}
-
-Tener en cuenta que en este contexto se pueden mencionar simulaciones, cálculos, revisión de hojas de datos, consulta con expertos, mediciones, etc.  Las acciones de verificación suelen considerar al entregable como ``caja blanca'', es decir se conoce en profundidad su funcionamiento interno.  En cambio, las acciones de validación suelen considerar al entregable como ``caja negra'', es decir, que no se conocen los detalles de su funcionamiento interno.
-
-\end{consigna}
 
 \section{15. Procesos de cierre}    
 \label{sec:cierre}
 
-\begin{consigna}{red}
-Establecer las pautas de trabajo para realizar una reunión final de evaluación del proyecto, tal que contemple las siguientes actividades:
+Sobre la finalización del proyecto se ejecutará la etapa de su cierre que consistirá de los siguientes procesos:  
 
 \begin{itemize}
-	\item Pautas de trabajo que se seguirán para analizar si se respetó el Plan de Proyecto original:
-	 - Indicar quién se ocupará de hacer esto y cuál será el procedimiento a aplicar. 
-	\item Identificación de las técnicas y procedimientos útiles e inútiles que se emplearon, y los problemas que surgieron y cómo se solucionaron:
-	 - Indicar quién se ocupará de hacer esto y cuál será el procedimiento para dejar registro.
-	\item Indicar quién organizará el acto de agradecimiento a todos los interesados, y en especial al equipo de trabajo y colaboradores:
-	  - Indicar esto y quién financiará los gastos correspondientes.
+	\item Análisis de las pautas de trabajo:
+	\begin{itemize}
+		\item Persona a cargo: Ing. Hernán Gomez Molino.
+		\item Procedimiento: se analizará el cumplimiento de la planificación original del proyecto en cuanto a fechas, recursos asignados y requerimientos. 
+		\end{itemize}
+	\item Relevamiento de las técnicas y procedimientos utilizados:
+	\begin{itemize}
+		\item Persona a cargo: Ing. Hernán Gomez Molino. 
+		\item Procedimiento: se evaluarán las técnicas y procedimientos aplicados, en cuanto a su utilidad. También se analizarán los imprevistos surgidos y las soluciones implementadas.
+	\end{itemize}
+	\item Acto de cierre:
+	\begin{itemize}
+		\item Persona a cargo: Ing. Hernán Gomez Molino. 
+		\item Procedimiento: El responsable del proyecto estará a cargo de realizar un acto de cierre, donde se agradecerá a todos los involucrados en el proyecto, miembros del jurado, docentes y autoridades de la CESE. 
+	\end{itemize}
 \end{itemize}
-
-\end{consigna}
-
 
 \end{document}

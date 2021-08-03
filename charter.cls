@@ -187,7 +187,8 @@
 	\centering \includegraphics[width=.7\textwidth]{./Figuras/logoFIUBA.pdf}
 	
 	\vspace{3cm}
-	{\Huge \textbf{\ttitle}} \\
+	%{\Huge \textbf{\ttitle}} \\ @HGM_se arregla la disposición del título
+	{\Huge \textbf{Sistema de Monitoreo Térmico\newline \newline de Bogies}} \\ %@HGM
 	\vspace{4cm}
 	
 	\flushleft
