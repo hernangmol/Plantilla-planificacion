@@ -596,13 +596,13 @@ A continuación se presentan los riesgos identificados para el proyecto junto co
 %--------------------------------------------------------------------------------------------------
 \textbf{Riesgo 1:} subestimación de los tiempos de ejecución de tareas.
 		\begin{itemize}
-			\item Severidad (5): severidad media, dado que permite un cierto nivel de corrección.
+			\item Severidad (5): severidad media, porque puede impactar en el cronograma de trabajo.
 			\item Ocurrencia (5): probabilidad media, por falta de experiencia en la estimación de tiempos de desarrollo de software. 
 		\end{itemize}
 %-------------------------------------------------------------------------------------------------
 \textbf{Riesgo 2:} imposibilidad de adquirir el convertidor DC/DC de alimentación.
 		\begin{itemize}
-			\item Severidad (5): severidad media, dado que permite un cierto nivel de corrección.
+			\item Severidad (5): severidad media, dado que es necesario para la implementación aunque existen alternativas.
 			\item Ocurrencia (7): probabilidad moderada, dado que no existe proveedor local y no 	es de uso masivo. 
 		\end{itemize} 
 %-------------------------------------------------------------------------------------------------  
@@ -854,7 +854,8 @@ A continuación se detallan los procedimientos de verificación y validación pa
 % Req 2.1----------------------------------------------------------------------------------
 \item Requerimiento 4.4.: Se proveerá soporte para un procedimiento de alta de sensor (registro de ID y su ubicación).  
 \begin{itemize}
-	\item Verificación: 
+	\item Verificación: se incluirá en las pruebas individuales de módulos de software. 
+	\item Validación: se incluirá en las pruebas funcionales. 
 \end{itemize}
 % Req 2.1----------------------------------------------------------------------------------
 \item Requerimiento 4.5.: El alta de sensor podrá realizarse de manera individual por el bus\#2; o de manera secuencial para todos los sensores instalados por el bus\#1 (bus normal de trabajo de los sensores). 
